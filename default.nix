@@ -33,8 +33,6 @@ let
       remoteBranch = 5;
     };
   };
-  myvim = import ./nixpkgs/vim { inherit cfg pkgs; };
-  mygit = import ./nixpkgs/git { inherit cfg pkgs; };
 in
 pkgs.mkShell {
   shellHook = ''
@@ -42,13 +40,10 @@ pkgs.mkShell {
   '';
   EDITOR = "vim";
   buildInputs = with pkgs; [
-    (myvim)
-    (mygit)
-    coreutils
-    zsh
     ag
     bc
     calc
+    coreutils
     fzf
     gcc
     gnumake
@@ -64,5 +59,8 @@ pkgs.mkShell {
     unzip
     w3m
     zip
+    zsh
+    (import ./nixpkgs/vim { inherit cfg pkgs; })
+    (import ./nixpkgs/git { inherit cfg pkgs; })
   ];
 }
