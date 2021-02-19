@@ -50,12 +50,14 @@ pkgs.mkShell {
     shellcheck
     stow
     tree
+    tmux
     units
     universal-ctags
     unzip
     w3m
     zip
   ];
+  EDITOR = "vim";
   shellHook = ''
     echo OK.
   '';
