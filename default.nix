@@ -27,10 +27,14 @@ let
       diff-remove = 1;
       staged = 11;
       currentBranch = 12;
+      diff-add-moved = 10;
+      diff-remove-moved = 9;
+      localBranch = 4;
+      remoteBranch = 5;
     };
   };
   myvim = import ./nixpkgs/vim { inherit cfg pkgs; };
-  mygit = import ./nixpkgs/git { inherit pkgs; };
+  mygit = import ./nixpkgs/git { inherit cfg pkgs; };
 in
 pkgs.mkShell {
   shellHook = ''
