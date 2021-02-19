@@ -30,10 +30,12 @@ let
     };
   };
   myvim = import ./nixpkgs/vim { inherit cfg pkgs; };
+  mygit = import ./nixpkgs/git { inherit pkgs; };
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
     (myvim)
+    (mygit)
     coreutils
     zsh
     ag
@@ -43,11 +45,13 @@ pkgs.mkShell {
     gcc
     gnumake
     gnupg
+    nixpkgs-fmt
     nox
     shellcheck
     stow
     tree
     units
+    universal-ctags
     unzip
     w3m
     zip
