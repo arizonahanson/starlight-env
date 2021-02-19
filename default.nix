@@ -59,6 +59,6 @@ pkgs.mkShell {
   ];
   EDITOR = "vim";
   shellHook = ''
-    echo OK.
+    zsh -l
   '';
 }
