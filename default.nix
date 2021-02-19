@@ -33,9 +33,9 @@ let
   mygit = import ./nixpkgs/git { inherit pkgs; };
 in
 pkgs.mkShell {
-  shellHook = ''
+  /*shellHook = ''
     exec zsh -i
-  '';
+  '';*/
   EDITOR = "vim";
   buildInputs = with pkgs; [
     (myvim)
