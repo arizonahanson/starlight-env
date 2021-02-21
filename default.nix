@@ -60,6 +60,7 @@ pkgs.stdenv.mkDerivation {
     universal-ctags
     unzip
     w3m
+    xz
     zip
     zsh
   ];
