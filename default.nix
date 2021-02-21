@@ -32,7 +32,9 @@ let
   myvim = import ./nixpkgs/vim { inherit cfg pkgs; };
   mygit = import ./nixpkgs/git { inherit pkgs; };
 in
-pkgs.mkShell {
+pkgs.stdenv.mkDerivation {
+  name = "starlight-env";
+  src = ./src;
   buildInputs = with pkgs; [
     (myvim)
     (mygit)
@@ -59,7 +61,5 @@ pkgs.mkShell {
     zip
   ];
   EDITOR = "vim";
-  shellHook = ''
-    exec zsh -i
-  '';
+  shellHook = "";
 }
