@@ -34,14 +34,14 @@ let
       remoteBranch = 5;
     };
   };
+  myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
+  mygit = (import ./nixpkgs/git { inherit cfg pkgs; });
 in
 pkgs.stdenv.mkDerivation {
   name = "starlight-env";
   src = ./.;
   EDITOR = "vim";
   buildInputs = with pkgs; [
-    (import ./nixpkgs/vim { inherit cfg pkgs; })
-    (import ./nixpkgs/git { inherit cfg pkgs; })
     ag
     calc
     coreutils
@@ -64,9 +64,19 @@ pkgs.stdenv.mkDerivation {
     xz
     zip
     zsh
+    (myvim)
+    (mygit)
   ];
+  installPhase = ''
+    mkdir -p "$out/src"
+    cp -r "$src/." "$out/src/"
+    mkdir -p "$out/bin"
+    echo "nix-shell $out/src" > $out/bin/dde
+    chmod a+x $out/bin/dde
+  '';
   shellHook = ''
     export SHELL="${pkgs.zsh}/bin/zsh"
-    exec ${pkgs.tmux}/bin/tmux
+    #export ZDOTDIR="''${out}/zdot"
+    exec "${pkgs.tmux}/bin/tmux" -2
   '';
 }
