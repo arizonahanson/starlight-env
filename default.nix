@@ -1,6 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 let
   cfg = {
+    darwin = !isNull (builtins.match ".*darwin$" builtins.currentSystem);
     theme = {
       fg = 15;
       fg-alt = 7;

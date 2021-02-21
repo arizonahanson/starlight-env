@@ -92,5 +92,5 @@
   pythonSupport = false;
   perlSupport = false;
   withManual = false; # time consuming
-  withLibsecret = builtins.currentSystem != "darwin";
+  withLibsecret = !cfg.darwin;
 }
