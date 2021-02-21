@@ -36,19 +36,20 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     (myvim)
     (mygit)
-    coreutils
     zsh
+    coreutils
     ag
-    bc
     calc
+    curl
     fzf
     gcc
+    gitAndTools.tig
     gnumake
     gnupg
+    man-db
     nixpkgs-fmt
     nox
     shellcheck
-    stow
     tree
     tmux
     units
