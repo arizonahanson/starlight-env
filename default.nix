@@ -65,5 +65,8 @@ pkgs.stdenv.mkDerivation {
     zip
     zsh
   ];
-  shellHook = "";
+  shellHook = ''
+    export SHELL="${pkgs.zsh}/bin/zsh"
+    exec tmux
+  '';
 }
