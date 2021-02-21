@@ -43,8 +43,8 @@ pkgs.stdenv.mkDerivation {
     (import ./nixpkgs/git { inherit cfg pkgs; })
     ag
     calc
-    curl
     coreutils
+    curl
     fzf
     gcc
     gitAndTools.tig
