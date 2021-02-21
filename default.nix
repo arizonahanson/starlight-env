@@ -27,22 +27,24 @@ let
       diff-remove = 1;
       staged = 11;
       currentBranch = 12;
+      diff-add-moved = 10;
+      diff-remove-moved = 9;
+      localBranch = 4;
+      remoteBranch = 5;
     };
   };
-  myvim = import ./nixpkgs/vim { inherit cfg pkgs; };
-  mygit = import ./nixpkgs/git { inherit pkgs; };
 in
 pkgs.stdenv.mkDerivation {
   name = "starlight-env";
   src = ./src;
+  EDITOR = "vim";
   buildInputs = with pkgs; [
-    (myvim)
-    (mygit)
-    zsh
-    coreutils
+    (import ./nixpkgs/vim { inherit cfg pkgs; })
+    (import ./nixpkgs/git { inherit cfg pkgs; })
     ag
     calc
     curl
+    coreutils
     fzf
     gcc
     gitAndTools.tig
@@ -59,7 +61,7 @@ pkgs.stdenv.mkDerivation {
     unzip
     w3m
     zip
+    zsh
   ];
-  EDITOR = "vim";
   shellHook = "";
 }
