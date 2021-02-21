@@ -36,7 +36,7 @@ let
 in
 pkgs.stdenv.mkDerivation {
   name = "starlight-env";
-  src = ./src;
+  src = ./.;
   EDITOR = "vim";
   buildInputs = with pkgs; [
     (import ./nixpkgs/vim { inherit cfg pkgs; })
