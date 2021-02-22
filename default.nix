@@ -46,11 +46,14 @@ pkgs.stdenv.mkDerivation {
     calc
     coreutils
     curl
+    findutils
     fzf
     gcc
     gitAndTools.tig
     gnumake
     gnupg
+    gnused
+    gnutar
     man-db
     nixpkgs-fmt
     nox
@@ -64,6 +67,9 @@ pkgs.stdenv.mkDerivation {
     xz
     zip
     zsh
+    zsh-autosuggestions
+    zsh-completions
+    zsh-syntax-highlighting
     (myvim)
     (mygit)
   ];
