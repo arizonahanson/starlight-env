@@ -21,6 +21,7 @@ pkgs.stdenv.mkDerivation {
     cat > $out/.zshrc <<EOF
     if test -r "\$HOME/.zshrc"; then
       source "\$HOME/.zshrc"
+      HISTFILE="\$HOME/.zsh_history"
     fi
     EOF
   '';

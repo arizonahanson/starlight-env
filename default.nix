@@ -85,6 +85,7 @@ pkgs.stdenv.mkDerivation {
   shellHook = ''
     export SHELL="${pkgs.zsh}/bin/zsh"
     export ZDOTDIR="${zdot}"
+    export HISTFILE="$HOME/.zsh_history"
     exec "${pkgs.tmux}/bin/tmux" -2
   '';
 }
