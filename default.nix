@@ -36,6 +36,7 @@ let
   };
   myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
   mygit = (import ./nixpkgs/git { inherit cfg pkgs; });
+  zdot = (import ./nixpkgs/zdot { inherit cfg pkgs; });
 in
 pkgs.stdenv.mkDerivation {
   name = "starlight-env";
@@ -72,6 +73,7 @@ pkgs.stdenv.mkDerivation {
     zsh-syntax-highlighting
     (myvim)
     (mygit)
+    (zdot)
   ];
   installPhase = ''
     mkdir -p "$out/src"
@@ -82,7 +84,7 @@ pkgs.stdenv.mkDerivation {
   '';
   shellHook = ''
     export SHELL="${pkgs.zsh}/bin/zsh"
-    #export ZDOTDIR="''${out}/zdot"
+    export ZDOTDIR="${zdot}"
     exec "${pkgs.tmux}/bin/tmux" -2
   '';
 }
