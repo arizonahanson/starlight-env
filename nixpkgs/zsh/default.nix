@@ -5,6 +5,7 @@ pkgs.stdenv.mkDerivation {
   src = ./.;
   buildInputs = with pkgs; [
     makeWrapper
+    oh-my-zsh
     zsh
     zsh-autosuggestions
     zsh-completions
@@ -44,6 +45,7 @@ pkgs.stdenv.mkDerivation {
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.zsh_history"
+    source ${pkgs.oh-my-zsh}/share/oh-my-zsh/templates/zshrc.zsh-template
     if test -r "\$HOME/.zshrc"; then
       source "\$HOME/.zshrc"
     fi
