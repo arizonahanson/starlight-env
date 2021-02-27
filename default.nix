@@ -83,9 +83,9 @@ pkgs.stdenv.mkDerivation {
     chmod a+x $out/bin/dde
   '';
   shellHook = ''
-    export SHELL="${pkgs.zsh}/bin/zsh"
+    SHELL="${pkgs.zsh}/bin/zsh"
+    HISTFILE="$HOME/.zsh_history"
     export ZDOTDIR="${zdot}"
-    export HISTFILE="$HOME/.zsh_history"
     exec "${pkgs.tmux}/bin/tmux" -2
   '';
 }
