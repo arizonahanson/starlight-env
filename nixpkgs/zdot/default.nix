@@ -30,5 +30,11 @@ pkgs.stdenv.mkDerivation {
       source "\$HOME/.zlogin"
     fi
     EOF
+
+    cat > $out/.zlogout <<EOF
+    if test -r "\$HOME/.zlogout"; then
+      source "\$HOME/.zlogout"
+    fi
+    EOF
   '';
 }
