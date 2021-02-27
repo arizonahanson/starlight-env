@@ -7,6 +7,7 @@ let
       fg-alt = 7;
       bg = 0;
       bg-alt = 8;
+      accent = 3;
       substitution = 7;
       path = 4;
       match = 9;
@@ -36,6 +37,7 @@ let
   };
   mygit = (import ./nixpkgs/git { inherit cfg pkgs; });
   myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
+  tmux_conf = (import ./nixpkgs/tmux_conf { inherit cfg pkgs; });
   zdot = (import ./nixpkgs/zdot { inherit cfg pkgs; });
 in
 pkgs.stdenv.mkDerivation {
@@ -85,6 +87,6 @@ pkgs.stdenv.mkDerivation {
   '';
   shellHook = ''
     SHELL="${pkgs.zsh}/bin/zsh"
-    exec "${pkgs.tmux}/bin/tmux" -2 new-session -A -s starlight
+    exec "${pkgs.tmux}/bin/tmux" -f ${tmux_conf}/tmux.conf -2 new-session -A -s starlight
   '';
 }
