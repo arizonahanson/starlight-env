@@ -85,6 +85,6 @@ pkgs.stdenv.mkDerivation {
   '';
   shellHook = ''
     SHELL="${pkgs.zsh}/bin/zsh"
-    exec "${pkgs.tmux}/bin/tmux" -2
+    exec "${pkgs.tmux}/bin/tmux" -2 new-session -A -s starlight
   '';
 }
