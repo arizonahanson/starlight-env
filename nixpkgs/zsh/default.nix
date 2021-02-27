@@ -45,9 +45,16 @@ pkgs.stdenv.mkDerivation {
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.zsh_history"
-    source ${pkgs.oh-my-zsh}/share/oh-my-zsh/templates/zshrc.zsh-template
+    export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
+    ZSH_THEME="robbyrussell"
+    plugins=(git colored-man-pages)
+    source \$ZSH/oh-my-zsh.sh
     if test -r "\$HOME/.zshrc"; then
       source "\$HOME/.zshrc"
+    fi
+    # Load the aliases.
+    if [ -f ~/.zsh_aliases ]; then
+        . ~/.zsh_aliases
     fi
     EOF
 
