@@ -46,7 +46,6 @@ pkgs.stdenv.mkDerivation {
   name = "starlight-env";
   src = ./.;
   EDITOR = "${cfg.pkgs.myvim}/bin/vim";
-  ZDOTDIR = "${cfg.pkgs.myzsh}";
   buildInputs = with pkgs; [
     ag
     calc
@@ -72,10 +71,6 @@ pkgs.stdenv.mkDerivation {
     w3m
     xz
     zip
-    zsh
-    zsh-autosuggestions
-    zsh-completions
-    zsh-syntax-highlighting
     (cfg.pkgs.mygit)
     (cfg.pkgs.mytmux)
     (cfg.pkgs.myvim)
@@ -85,7 +80,7 @@ pkgs.stdenv.mkDerivation {
     makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "$src"
   '';
   shellHook = ''
-    SHELL="${pkgs.zsh}/bin/zsh"
+    SHELL="${cfg.pkgs.myzsh}/bin/zsh"
     exec "${cfg.pkgs.mytmux}/bin/tmux" -2 new-session -A -s starlight
   '';
 }

@@ -3,8 +3,15 @@
 pkgs.stdenv.mkDerivation {
   name = "myzsh";
   src = ./.;
+  buildInputs = with pkgs; [
+    makeWrapper
+    zsh
+    zsh-autosuggestions
+    zsh-completions
+    zsh-syntax-highlighting
+  ];
   installPhase = ''
-    mkdir -p $out
+    makeWrapper "${pkgs.zsh}/bin/zsh" "$out/bin/zsh" --set ZDOTDIR $out
 
     cat > $out/.zenv <<EOF
     # Only execute this file once per shell.
