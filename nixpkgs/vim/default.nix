@@ -9,10 +9,10 @@ in
   darwinSupport = cfg.darwin;
   guiSupport = "no";
   luaSupport = false;
-  pythonSupport = false;
-  perlSupport = false;
-  rubySupport = false;
   netbeansSupport = false;
+  perlSupport = false;
+  pythonSupport = false;
+  rubySupport = false;
   ximSupport = !cfg.darwin;
 }).customize
 {
@@ -22,7 +22,7 @@ in
     {
       beforePlugins = ''
         let g:ale_completion_enabled=1
-        let g:ale_completion_delay=500
+        let g:ale_completion_delay=1000
         let g:ale_cache_executable_check_failures=1
         let g:ale_close_preview_on_insert=1
         let g:ale_java_javalsp_executable='${homeDir}/opt/java-language-server/dist/lang_server_mac.sh'
@@ -34,7 +34,7 @@ in
           \ }
         let g:ale_fix_on_save=1
         let g:ale_hover_to_preview=1
-        let g:ale_lint_delay=1500
+        let g:ale_lint_delay=2000
         let g:ale_sign_error=' '
         let g:ale_sign_warning=' '
         let g:ale_sign_info=' '
