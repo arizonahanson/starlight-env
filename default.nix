@@ -78,6 +78,8 @@ pkgs.stdenv.mkDerivation {
   ];
   installPhase = ''
     makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "$src"
+    makeWrapper "${pkgs.nix}/bin/nix-env" "$out/bin/dde-update" \
+      --add-flags "-i starlight-env -f https://github.com/isaacwhanson/starlight-env/archive/main.tar.gz"
   '';
   shellHook = ''
     SHELL="${cfg.pkgs.myzsh}/bin/zsh"
