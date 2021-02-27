@@ -34,17 +34,19 @@ let
       localBranch = 4;
       remoteBranch = 5;
     };
+    pkgs = {
+      mygit = (import ./nixpkgs/git { inherit cfg pkgs; });
+      mytmux = (import ./nixpkgs/tmux { inherit cfg pkgs; });
+      myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
+      myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
+    };
   };
-  mygit = (import ./nixpkgs/git { inherit cfg pkgs; });
-  mytmux = (import ./nixpkgs/tmux { inherit cfg pkgs; });
-  myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
-  myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
 in
 pkgs.stdenv.mkDerivation {
   name = "starlight-env";
   src = ./.;
-  EDITOR = "${myvim}/bin/vim";
-  ZDOTDIR = "${myzsh}";
+  EDITOR = "${cfg.pkgs.myvim}/bin/vim";
+  ZDOTDIR = "${cfg.pkgs.myzsh}";
   buildInputs = with pkgs; [
     ag
     calc
@@ -74,10 +76,10 @@ pkgs.stdenv.mkDerivation {
     zsh-autosuggestions
     zsh-completions
     zsh-syntax-highlighting
-    (mygit)
-    (mytmux)
-    (myvim)
-    (myzsh)
+    (cfg.pkgs.mygit)
+    (cfg.pkgs.mytmux)
+    (cfg.pkgs.myvim)
+    (cfg.pkgs.myzsh)
   ];
   installPhase = ''
     mkdir -p "$out/src"
@@ -88,6 +90,6 @@ pkgs.stdenv.mkDerivation {
   '';
   shellHook = ''
     SHELL="${pkgs.zsh}/bin/zsh"
-    exec "${pkgs.tmux}/bin/tmux" -f ${mytmux}/tmux.conf -2 new-session -A -s starlight
+    exec "${pkgs.tmux}/bin/tmux" -f ${cfg.pkgs.mytmux}/tmux.conf -2 new-session -A -s starlight
   '';
 }
