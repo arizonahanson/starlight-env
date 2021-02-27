@@ -23,7 +23,7 @@ pkgs.stdenv.mkDerivation {
       source "\$HOME/.zprofile"
     fi
     # Setup login shell init stuff.
-    eval `dircolors -b /etc/dircolors`
+    #eval `dircolors -b /etc/dircolors`
     if [ -n "$XDG_CACHE_HOME" ]; then
       mkdir -p "$XDG_CACHE_HOME"
     fi
