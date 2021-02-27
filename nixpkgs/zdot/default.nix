@@ -24,5 +24,11 @@ pkgs.stdenv.mkDerivation {
       HISTFILE="\$HOME/.zsh_history"
     fi
     EOF
+
+    cat > $out/.zlogin <<EOF
+    if test -r "\$HOME/.zlogin"; then
+      source "\$HOME/.zlogin"
+    fi
+    EOF
   '';
 }
