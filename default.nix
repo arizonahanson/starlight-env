@@ -34,14 +34,15 @@ let
       remoteBranch = 5;
     };
   };
-  myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
   mygit = (import ./nixpkgs/git { inherit cfg pkgs; });
+  myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
   zdot = (import ./nixpkgs/zdot { inherit cfg pkgs; });
 in
 pkgs.stdenv.mkDerivation {
   name = "starlight-env";
   src = ./.;
-  EDITOR = "vim";
+  EDITOR = "${myvim}/bin/vim";
+  ZDOTDIR = "${zdot}";
   buildInputs = with pkgs; [
     ag
     calc
@@ -84,8 +85,6 @@ pkgs.stdenv.mkDerivation {
   '';
   shellHook = ''
     SHELL="${pkgs.zsh}/bin/zsh"
-    HISTFILE="$HOME/.zsh_history"
-    export ZDOTDIR="${zdot}"
     exec "${pkgs.tmux}/bin/tmux" -2
   '';
 }
