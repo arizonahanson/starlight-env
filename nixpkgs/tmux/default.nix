@@ -1,7 +1,7 @@
 { cfg, pkgs ? import <nixpkgs> { } }:
 
 pkgs.stdenv.mkDerivation {
-  name = "tmux_conf";
+  name = "mytmux";
   src = ./.;
   installPhase = ''
     mkdir -p $out

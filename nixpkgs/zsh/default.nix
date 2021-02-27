@@ -1,7 +1,7 @@
 { cfg, pkgs ? import <nixpkgs> { } }:
 
 pkgs.stdenv.mkDerivation {
-  name = "zdot";
+  name = "myzsh";
   src = ./.;
   installPhase = ''
     mkdir -p $out

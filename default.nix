@@ -36,15 +36,15 @@ let
     };
   };
   mygit = (import ./nixpkgs/git { inherit cfg pkgs; });
+  mytmux = (import ./nixpkgs/tmux { inherit cfg pkgs; });
   myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
-  tmux_conf = (import ./nixpkgs/tmux_conf { inherit cfg pkgs; });
-  zdot = (import ./nixpkgs/zdot { inherit cfg pkgs; });
+  myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
 in
 pkgs.stdenv.mkDerivation {
   name = "starlight-env";
   src = ./.;
   EDITOR = "${myvim}/bin/vim";
-  ZDOTDIR = "${zdot}";
+  ZDOTDIR = "${myzsh}";
   buildInputs = with pkgs; [
     ag
     calc
@@ -74,9 +74,10 @@ pkgs.stdenv.mkDerivation {
     zsh-autosuggestions
     zsh-completions
     zsh-syntax-highlighting
-    (myvim)
     (mygit)
-    (zdot)
+    (mytmux)
+    (myvim)
+    (myzsh)
   ];
   installPhase = ''
     mkdir -p "$out/src"
@@ -87,6 +88,6 @@ pkgs.stdenv.mkDerivation {
   '';
   shellHook = ''
     SHELL="${pkgs.zsh}/bin/zsh"
-    exec "${pkgs.tmux}/bin/tmux" -f ${tmux_conf}/tmux.conf -2 new-session -A -s starlight
+    exec "${pkgs.tmux}/bin/tmux" -f ${mytmux}/tmux.conf -2 new-session -A -s starlight
   '';
 }
