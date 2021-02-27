@@ -49,6 +49,8 @@ pkgs.stdenv.mkDerivation {
     ZSH_THEME="robbyrussell"
     plugins=(git colored-man-pages)
     source \$ZSH/oh-my-zsh.sh
+    source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     if test -r "\$HOME/.zshrc"; then
       source "\$HOME/.zshrc"
     fi
