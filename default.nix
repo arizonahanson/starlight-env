@@ -60,6 +60,7 @@ pkgs.stdenv.mkDerivation {
     gnupg
     gnused
     gnutar
+    makeWrapper
     man-db
     nixpkgs-fmt
     nox
@@ -81,11 +82,7 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myzsh)
   ];
   installPhase = ''
-    mkdir -p "$out/src"
-    cp -r "$src/." "$out/src/"
-    mkdir -p "$out/bin"
-    echo "nix-shell $out/src" > $out/bin/dde
-    chmod a+x $out/bin/dde
+    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "$src"
   '';
   shellHook = ''
     SHELL="${pkgs.zsh}/bin/zsh"
