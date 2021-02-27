@@ -16,7 +16,7 @@ pkgs.stdenv.mkDerivation {
     EOF
 
     cat > $out/.zprofile <<EOF
-    # Only execute this file once per shell.
+    # Only execute this file once per login shell.
     if [ -n "\$__ZDOT_ZPROFILE_SOURCED" ]; then return; fi
     __ZDOT_ZPROFILE_SOURCED=1
     if test -r "\$HOME/.zprofile"; then
@@ -33,7 +33,7 @@ pkgs.stdenv.mkDerivation {
     EOF
 
     cat > $out/.zshrc <<EOF
-    # Only execute this file once per shell.
+    # Only execute this file once per interactive shell.
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.zsh_history"
