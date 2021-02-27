@@ -85,6 +85,7 @@
           title-blur = ${toString cfg.theme.bg-alt} default
           title-focus = ${toString cfg.theme.fg} ${toString cfg.theme.bg-alt}
       EOF
+      wrapProgram $out/bin/git --add-flags "-c 'include.path=$out/etc/gitconfig'"
     '';
   }
 )).override {
