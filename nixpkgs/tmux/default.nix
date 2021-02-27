@@ -3,9 +3,10 @@
 pkgs.stdenv.mkDerivation {
   name = "mytmux";
   src = ./.;
+  buildInputs = [ pkgs.tmux pkgs.makeWrapper ];
   installPhase = ''
-    mkdir -p $out
-    cat > $out/tmux.conf <<EOF
+    mkdir -p $out/etc
+    cat > $out/etc/tmux.conf <<EOF
     set -g history-limit 50000
     set -g display-time 4000
     set -g focus-events on
@@ -55,5 +56,6 @@ pkgs.stdenv.mkDerivation {
     bind % split-window -h -c "#{pane_current_path}"
     bind c new-window -c "#{pane_current_path}"
     EOF
+    makeWrapper "${pkgs.tmux}/bin/tmux" "$out/bin/tmux" --add-flags "-f '$out/etc/tmux.conf'"
   '';
 }

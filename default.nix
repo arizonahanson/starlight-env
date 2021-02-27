@@ -65,7 +65,6 @@ pkgs.stdenv.mkDerivation {
     nox
     shellcheck
     tree
-    tmux
     units
     universal-ctags
     unzip
@@ -90,6 +89,6 @@ pkgs.stdenv.mkDerivation {
   '';
   shellHook = ''
     SHELL="${pkgs.zsh}/bin/zsh"
-    exec "${pkgs.tmux}/bin/tmux" -f ${cfg.pkgs.mytmux}/tmux.conf -2 new-session -A -s starlight
+    exec "${cfg.pkgs.mytmux}/bin/tmux" -2 new-session -A -s starlight
   '';
 }
