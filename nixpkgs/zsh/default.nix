@@ -47,7 +47,7 @@ pkgs.stdenv.mkDerivation {
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.zsh_history"
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
-    ZSH_THEME="robbyrussell"
+    ZSH_THEME="agnoster"
     plugins=(git colored-man-pages)
     autoload -U colors && colors
     source \$ZSH/oh-my-zsh.sh
