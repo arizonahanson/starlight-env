@@ -280,7 +280,7 @@ pkgs.stdenv.mkDerivation {
     export ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=${toString cfg.theme.keyword}'
     export ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=${toString cfg.theme.constant}'
     export ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=${toString cfg.theme.constant}'
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${toString cfg.theme.fg}"
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${toString cfg.theme.bg-alt}"
     export ZSH_AUTOSUGGEST_STRATEGY=("match_prev_cmd")
     ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=vi-forward-char
     #ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=""
