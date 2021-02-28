@@ -205,37 +205,41 @@ let
     name = "zshtheme";
     destination = "/themes/starlight.zsh-theme";
     text = ''
-      PROMPT=" "
       git_prompt_status() {
         precmd_update_git_vars
-        STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX %{''${reset_color}%}"
+        STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX%{$reset_color%}"
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
         if [ "$GIT_STASHED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STASHED%{''${reset_color}%}"
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STASHED%{$reset_color%}"
         fi
         if [ "$GIT_UNTRACKED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{''${reset_color}%}"
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
         fi
         if [ "$GIT_STAGED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED%{''${reset_color}%}"
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED%{$reset_color%}"
         fi
         if [ "$GIT_CONFLICTS" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS%{''${reset_color}%}"
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS%{$reset_color%}"
         fi
         if [ "$GIT_CHANGED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED%{''${reset_color}%}"
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED%{$reset_color%}"
         fi
         if [ "$GIT_BEHIND" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{''${reset_color}%}"
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{$reset_color%}"
         fi
         if [ "$GIT_AHEAD" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{''${reset_color}%}"
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{$reset_color%}"
         fi
         if [ "$GIT_CLEAN" -eq "1" ]; then
             STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
         fi
-        STATUS="$STATUS%{''${reset_color}%} $ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{''${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-        RPROMPT="$STATUS %~"
+        if [ "$HOME" = "$PWD" ]; then
+            WORKDIR=""
+        else
+            WORKDIR="%3~"
+        fi
+        PROMPT="%(?.%{$fg[white]%}.%{$fg[red]%})%{$reset_color%}"
+        RPROMPT="$STATUS%{$reset_color%} $ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SUFFIX $WORKDIR"
       }
       autoload -U add-zsh-hook
       add-zsh-hook precmd git_prompt_status
