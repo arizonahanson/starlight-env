@@ -218,13 +218,13 @@ pkgs.stdenv.mkDerivation {
   installPhase = ''
     makeWrapper "${pkgs.zsh}/bin/zsh" "$out/bin/zsh" --set ZDOTDIR $out
 
-    cat > $out/.zenv <<EOF
+    cat > $out/.zshenv <<EOF
     # Only execute this file once per shell.
     if [ -n "\$__ZDOT_ZSHENV_SOURCED" ]; then return; fi
     __ZDOT_ZSHENV_SOURCED=1
     umask 077
-    if test -r "\$HOME/.zenv"; then
-      source "\$HOME/.zenv"
+    if test -r "\$HOME/.zshenv"; then
+      source "\$HOME/.zshenv"
     fi
     EOF
 
