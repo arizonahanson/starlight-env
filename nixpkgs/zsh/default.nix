@@ -250,7 +250,7 @@ let
       ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}%{%G%}"
       ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}%{%G%}"
       ZSH_THEME_GIT_PROMPT_STASHED="%{$fg_bold[blue]%}%{ %G%}"
-      ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
+      ZSH_THEME_GIT_PROMPT_CLEAN=""
     '';
   };
 in
