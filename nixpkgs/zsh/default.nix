@@ -222,6 +222,7 @@ pkgs.stdenv.mkDerivation {
     # Only execute this file once per shell.
     if [ -n "\$__ZDOT_ZSHENV_SOURCED" ]; then return; fi
     __ZDOT_ZSHENV_SOURCED=1
+    umask 077
     if test -r "\$HOME/.zenv"; then
       source "\$HOME/.zenv"
     fi
@@ -255,6 +256,30 @@ pkgs.stdenv.mkDerivation {
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    export ZSH_HIGHLIGHT_STYLES[cursor]='fg=${toString cfg.theme.select}'
+    export ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=${toString cfg.theme.match}'
+    export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=${toString cfg.theme.error}'
+    export ZSH_HIGHLIGHT_STYLES[path]='fg=${toString cfg.theme.path}'
+    export ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=${toString cfg.theme.match}'
+    export ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=${toString cfg.theme.pattern}'
+    export ZSH_HIGHLIGHT_STYLES[globbing]='fg=${toString cfg.theme.pattern}'
+    export ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=${toString cfg.theme.character}'
+    export ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=${toString cfg.theme.character}'
+    export ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=${toString cfg.theme.string}'
+    export ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=${toString cfg.theme.function}'
+    export ZSH_HIGHLIGHT_STYLES[alias]='fg=${toString cfg.theme.function}'
+    export ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=${toString cfg.theme.substitution}'
+    export ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=${toString cfg.theme.substitution}'
+    export ZSH_HIGHLIGHT_STYLES[function]='fg=${toString cfg.theme.function}'
+    export ZSH_HIGHLIGHT_STYLES[precommand]='fg=${toString cfg.theme.warning}'
+    export ZSH_HIGHLIGHT_STYLES[command]='fg=${toString cfg.theme.executable}'
+    export ZSH_HIGHLIGHT_STYLES[builtin]='fg=${toString cfg.theme.statement}'
+    export ZSH_HIGHLIGHT_STYLES[redirection]='fg=${toString cfg.theme.keyword}'
+    export ZSH_HIGHLIGHT_STYLES[arg0]='fg=${toString cfg.theme.keyword}'
+    export ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=${toString cfg.theme.keyword}'
+    export ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=${toString cfg.theme.keyword}'
+    export ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=${toString cfg.theme.constant}'
+    export ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=${toString cfg.theme.constant}'
     # better 'help'
     autoload -Uz run-help
     unalias run-help

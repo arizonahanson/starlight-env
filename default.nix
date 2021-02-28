@@ -21,6 +21,7 @@ let
       function = 6;
       type = 4;
       statement = 12;
+      pattern = 12;
       keyword = 10;
       error = 1;
       warning = 9;
