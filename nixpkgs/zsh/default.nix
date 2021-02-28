@@ -208,7 +208,6 @@ let
       PROMPT=" "
       git_prompt_status() {
           precmd_update_git_vars
-          if [ -n "$__CURRENT_GIT_STATUS" ]; then
             STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX %{''${reset_color}%}"
             STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
             if [ "$GIT_STASHED" -ne "0" ]; then
@@ -237,7 +236,6 @@ let
             fi
             STATUS="$STATUS%{''${reset_color}%} $ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{''${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
             echo "$STATUS"
-          fi
       }
       autoload -U add-zsh-hook
       add-zsh-hook chpwd update_current_git_vars
