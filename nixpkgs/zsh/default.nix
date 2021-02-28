@@ -263,12 +263,12 @@ pkgs.stdenv.mkDerivation {
     plugins=(git colored-man-pages)
     eval \$(dircolors -b ${dircolors}/etc/dircolors)
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
-    source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     # fzf with tmux
     source ${pkgs.fzf}/share/fzf/key-bindings.zsh
     source ${pkgs.fzf}/share/fzf/completion.zsh
     zstyle ':completion:*:default' list-colors \''${(s.:.)LS_COLORS} ma='38;5;${toString cfg.theme.select}'
+    source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     export ZSH_HIGHLIGHT_STYLES[cursor]='fg=${toString cfg.theme.select}'
     export ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=${toString cfg.theme.match}'
     export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=${toString cfg.theme.error}'
@@ -307,11 +307,8 @@ pkgs.stdenv.mkDerivation {
       source "\$HOME/.zshrc"
     fi
     source \$ZSH/oh-my-zsh.sh
-    # keep zcompdump in tmpfs
-    autoload -U compinit && compinit -d "$XDG_CACHE_HOME/zcompdump"
     # vi-like editing
     bindkey -v
-    bindkey '^ ' autosuggest-accept
     # backspace
     bindkey -a '^?' vi-backward-delete-char
     # home
@@ -332,6 +329,10 @@ pkgs.stdenv.mkDerivation {
     bindkey -a "\''${terminfo[kend]}" vi-end-of-line
     # complete word
     bindkey '^w' vi-forward-word
+    bindkey '^ ' autosuggest-accept
+    source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    # keep zcompdump in tmpfs
+    autoload -U compinit && compinit -d "$XDG_CACHE_HOME/zcompdump"
     # save prompt status
     zle-line-init() {
       typeset -g __prompt_status="\$?"
