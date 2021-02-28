@@ -238,7 +238,7 @@ let
         else
             WORKDIR="%3~"
         fi
-        PROMPT="%(?.%{$fg[white]%}.%{$fg[red]%})$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%}"
+        PROMPT="%(?.%{$fg[white]%}.%{$fg[red]%})$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
         RPROMPT="$STATUS%{$reset_color%} $ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SUFFIX $WORKDIR"
       }
       autoload -U add-zsh-hook
@@ -249,7 +249,7 @@ let
       ZSH_THEME_GIT_PROMPT_PROMPT=""
       ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
       ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[yellow]%} "
-      ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}✖"
+      ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%} "
       ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg_bold[red]%} "
       ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%} "
       ZSH_THEME_GIT_PROMPT_STASHED="%{$fg_bold[blue]%} "
