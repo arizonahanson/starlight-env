@@ -205,15 +205,54 @@ let
     name = "zshtheme";
     destination = "/themes/starlight.zsh-theme";
     text = ''
-      PROMPT=" "
-      RPROMPT="$(git_super_status)"
-      ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[grey]%}(%{$fg[red]%}"
-      ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-      ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[grey]%}) %{$fg[yellow]%}⚡%{$reset_color%}"
-      ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[grey]%})"
-      ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="%{$fg_bold[magenta]%}%{$reset_color%}"
-      ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="%{$fg_bold[magenta]%}%{$reset_color%}"
-      ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%{$fg_bold[magenta]%}↕%{$reset_color%}"    '';
+      PROMPT=""
+      git_prompt_status() {
+          precmd_update_git_vars
+          if [ -n "$__CURRENT_GIT_STATUS" ]; then
+            STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX %{''${reset_color}%}"
+            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
+            if [ "$GIT_STASHED" -ne "0" ]; then
+                STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STASHED%{''${reset_color}%}"
+            fi
+            if [ "$GIT_UNTRACKED" -ne "0" ]; then
+                STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{''${reset_color}%}"
+            fi
+            if [ "$GIT_STAGED" -ne "0" ]; then
+                STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED%{''${reset_color}%}"
+            fi
+            if [ "$GIT_CONFLICTS" -ne "0" ]; then
+                STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS%{''${reset_color}%}"
+            fi
+            if [ "$GIT_CHANGED" -ne "0" ]; then
+                STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED%{''${reset_color}%}"
+            fi
+            if [ "$GIT_BEHIND" -ne "0" ]; then
+                STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{''${reset_color}%}"
+            fi
+            if [ "$GIT_AHEAD" -ne "0" ]; then
+                STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{''${reset_color}%}"
+            fi
+            if [ "$GIT_CLEAN" -eq "1" ]; then
+                STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+            fi
+            STATUS="$STATUS%{''${reset_color}%} $ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{''${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+            echo "$STATUS"
+          fi
+      }
+      ZSH_THEME_GIT_PROMPT_PREFIX=""
+      ZSH_THEME_GIT_PROMPT_SUFFIX=""
+      ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+      ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
+      ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[yellow]%}%{ %G%}"
+      ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
+      ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg_bold[red]%}%{ %G%}"
+      ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg_bold[red]%}%{%G%}"
+      ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}%{%G%}"
+      ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}%{%G%}"
+      ZSH_THEME_GIT_PROMPT_STASHED="%{$fg_bold[blue]%}%{ %G%}"
+      ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
+      RPROMPT="$(git_prompt_status) %~"
+    '';
   };
 in
 pkgs.stdenv.mkDerivation {
