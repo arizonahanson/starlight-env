@@ -5,7 +5,7 @@
     doInstallCheck = false;
     preFixup = ''
       mkdir -p $out/etc
-      cat > $out/etc/gitconfig << EOF
+      cat >> $out/etc/gitconfig << EOF
         [core]
           autocrlf = false
           filemode = true
