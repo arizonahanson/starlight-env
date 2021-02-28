@@ -260,7 +260,7 @@ pkgs.stdenv.mkDerivation {
     HISTFILE="\$HOME/.zsh_history"
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
     ZSH_THEME="random"
-    plugins=(git colored-man-pages)
+    plugins=(git colored-man-pages git-prompt)
     eval \$(dircolors -b ${dircolors}/etc/dircolors)
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
     # fzf with tmux
