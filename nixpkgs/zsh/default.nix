@@ -323,14 +323,14 @@ pkgs.stdenv.mkDerivation {
     EOF
 
     cat > $out/.zlogin <<EOF
-    if test -r "\$HOME/.zlogin"; then
-      source "\$HOME/.zlogin"
+    if test -r ~/.zlogin; then
+      . ~/.zlogin
     fi
     EOF
 
     cat > $out/.zlogout <<EOF
-    if test -r "\$HOME/.zlogout"; then
-      source "\$HOME/.zlogout"
+    if test -r ~/.zlogout; then
+      . ~/.zlogout
     fi
     EOF
   '';
