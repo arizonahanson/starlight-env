@@ -207,47 +207,48 @@ let
     destination = "/themes/starlight.zsh-theme";
     text = ''
       git_prompt_status() {
-        precmd_update_git_vars
-        STATUS="%{$reset_color%}$ZSH_THEME_GIT_PROMPT_PREFIX"
-        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
-        if [ "$GIT_STASHED" -ne "0" ]; then
-            STATUS="$STATUS${toFG cfg.theme.localBranch}$ZSH_THEME_GIT_PROMPT_STASHED%{$reset_color%}"
-        fi
-        if [ "$GIT_UNTRACKED" -ne "0" ]; then
-            STATUS="$STATUS${toFG cfg.theme.diff-remove}$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
-        fi
-        if [ "$GIT_STAGED" -ne "0" ]; then
-            STATUS="$STATUS${toFG cfg.theme.staged}$ZSH_THEME_GIT_PROMPT_STAGED%{$reset_color%}"
-        fi
-        if [ "$GIT_CONFLICTS" -ne "0" ]; then
-            STATUS="$STATUS${toFG cfg.theme.error}$ZSH_THEME_GIT_PROMPT_CONFLICTS%{$reset_color%}"
-        fi
-        if [ "$GIT_CHANGED" -ne "0" ]; then
-            STATUS="$STATUS${toFG cfg.theme.diff-change}$ZSH_THEME_GIT_PROMPT_CHANGED%{$reset_color%}"
-        fi
-        if [ "$GIT_BEHIND" -ne "0" ]; then
-            STATUS="$STATUS${toFG cfg.theme.warning}$GIT_BEHIND$ZSH_THEME_GIT_PROMPT_BEHIND%{$reset_color%}"
-        fi
-        if [ "$GIT_AHEAD" -ne "0" ]; then
-            STATUS="$STATUS${toFG cfg.theme.diff-add}$GIT_AHEAD$ZSH_THEME_GIT_PROMPT_AHEAD%{$reset_color%}"
-        fi
-        if [ "$GIT_CLEAN" -eq "1" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
-        fi
         git_root=$PWD
         while [[ $git_root != / && ! -e $git_root/.git ]]; do
           git_root=$git_root:h
         done
-        if [[ $git_root = / ]]; then
+        if [ ! $git_root = / ]; then
+          precmd_update_git_vars
+          STATUS="%{$reset_color%}$ZSH_THEME_GIT_PROMPT_PREFIX"
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
+          GIT_STASHED=$(git stash list 2>/dev/null | wc -l)
+          if [ "$GIT_UNTRACKED" -ne "0" ]; then
+              STATUS="$STATUS${toFG cfg.theme.diff-remove}$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
+          fi
+          if [ "$GIT_STAGED" -ne "0" ]; then
+              STATUS="$STATUS${toFG cfg.theme.staged}$ZSH_THEME_GIT_PROMPT_STAGED%{$reset_color%}"
+          fi
+          if [ "$GIT_CONFLICTS" -ne "0" ]; then
+              STATUS="$STATUS${toFG cfg.theme.error}$ZSH_THEME_GIT_PROMPT_CONFLICTS%{$reset_color%}"
+          fi
+          if [ "$GIT_CHANGED" -ne "0" ]; then
+              STATUS="$STATUS${toFG cfg.theme.diff-change}$ZSH_THEME_GIT_PROMPT_CHANGED%{$reset_color%}"
+          fi
+          if [ "$GIT_STASHED" -ne "0" ]; then
+              STATUS="$STATUS${toFG cfg.theme.localBranch}$GIT_STASHED$ZSH_THEME_GIT_PROMPT_STASHED%{$reset_color%}"
+          fi
+          if [ "$GIT_BEHIND" -ne "0" ]; then
+              STATUS="$STATUS${toFG cfg.theme.warning}$GIT_BEHIND$ZSH_THEME_GIT_PROMPT_BEHIND%{$reset_color%}"
+          fi
+          if [ "$GIT_AHEAD" -ne "0" ]; then
+              STATUS="$STATUS${toFG cfg.theme.diff-add}$GIT_AHEAD$ZSH_THEME_GIT_PROMPT_AHEAD%{$reset_color%}"
+          fi
+          if [ "$GIT_CLEAN" -eq "1" ]; then
+              STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+          fi
+          parent=''${git_root%\/*}
+          WORKDIR="${toFG cfg.theme.path}''${PWD#$parent/}%{$reset_color%}"
+        else
           unset git_root
           if [ "$PWD" = "$HOME" ]; then
             WORKDIR="${toFG cfg.theme.path}$ZSH_THEME_GIT_PROMPT_HOME%{$reset_color%}"
           else
             WORKDIR="${toFG cfg.theme.path}%3~%{$reset_color%}"
           fi
-        else
-          parent=''${git_root%\/*}
-          WORKDIR="${toFG cfg.theme.path}''${PWD#$parent/}%{$reset_color%}"
         fi
         PROMPT="%(?.${toFG cfg.theme.fg-alt}.${toFG cfg.theme.error})$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
         PS2="%{$reset_color%}${toFG cfg.theme.warning}$ZSH_THEME_GIT_PROMPT_PROMPT2%{$reset_color%}"
@@ -259,13 +260,13 @@ let
       ZSH_THEME_GIT_PROMPT_SUFFIX=""
       ZSH_THEME_GIT_PROMPT_SEPARATOR=""
       ZSH_THEME_GIT_PROMPT_PROMPT=""
-      ZSH_THEME_GIT_PROMPT_PROMPT2="  "
+      ZSH_THEME_GIT_PROMPT_PROMPT2="   "
       ZSH_THEME_GIT_PROMPT_BRANCH=""
       ZSH_THEME_GIT_PROMPT_STAGED=" "
-      ZSH_THEME_GIT_PROMPT_CONFLICTS=" "
+      ZSH_THEME_GIT_PROMPT_CONFLICTS=" "
       ZSH_THEME_GIT_PROMPT_CHANGED=" "
       ZSH_THEME_GIT_PROMPT_UNTRACKED=" "
-      ZSH_THEME_GIT_PROMPT_STASHED=" "
+      ZSH_THEME_GIT_PROMPT_STASHED=""
       ZSH_THEME_GIT_PROMPT_BEHIND=""
       ZSH_THEME_GIT_PROMPT_AHEAD=""
       ZSH_THEME_GIT_PROMPT_CLEAN=""
