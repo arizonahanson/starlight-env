@@ -17,7 +17,6 @@ pkgs.stdenv.mkDerivation {
     set -g monitor-activity on
     set -s escape-time 0
     set -g status "on"
-    set -g status-keys "vi"
     set -g status-left-length "100"
     set -g status-right-length "100"
     set -g status-right ""
@@ -52,6 +51,12 @@ pkgs.stdenv.mkDerivation {
 
     # clock
     set-window-option -g clock-mode-colour colour${toString cfg.theme.accent}
+
+    # bindings
+    set -g mode-keys vi
+    set -g status-keys "vi"
+    bind -T copy-mode-vi v send-keys -X begin-selection
+    bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
     bind '"' split-window -c "#{pane_current_path}"
     bind % split-window -h -c "#{pane_current_path}"
     bind c new-window -c "#{pane_current_path}"
