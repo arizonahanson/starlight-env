@@ -71,6 +71,7 @@ pkgs.stdenv.mkDerivation {
     tree
     units
     universal-ctags
+    unixtools.whereis
     unzip
     w3m
     xz
