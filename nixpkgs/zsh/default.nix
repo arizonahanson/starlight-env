@@ -205,7 +205,7 @@ let
     name = "zshtheme";
     destination = "/themes/starlight.zsh-theme";
     text = ''
-      PROMPT=""
+      PROMPT=" "
       git_prompt_status() {
           precmd_update_git_vars
           if [ -n "$__CURRENT_GIT_STATUS" ]; then
