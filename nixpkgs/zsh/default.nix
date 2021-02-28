@@ -360,9 +360,19 @@ pkgs.stdenv.mkDerivation {
       fi
     }
     # Load the aliases.
+    . "\$ZDOTDIR/.zsh_aliases"
     if [ -f ~/.zsh_aliases ]; then
         . ~/.zsh_aliases
     fi
+    EOF
+    cat > $out/.zsh_aliases <<EOF
+    alias l="ls -hF";
+    alias la="ls -AhF";
+    alias ll="ls -lAhF";
+    alias lt="tree -aFC -I .git";
+    alias cp="cp --reflink=auto";
+    alias xz="xz --threads=0";
+    alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${toString cfg.theme.bg-alt}' --color-path '38;5;${toString cfg.theme.path}' --color-match '38;5;${toString cfg.theme.match}'";
     EOF
 
     cat > $out/.zlogin <<EOF
