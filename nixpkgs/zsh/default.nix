@@ -239,6 +239,7 @@ let
             echo "$STATUS"
           fi
       }
+      autoload -U add-zsh-hook
       add-zsh-hook chpwd update_current_git_vars
       add-zsh-hook precmd precmd_update_git_vars
       add-zsh-hook preexec preexec_update_git_vars
