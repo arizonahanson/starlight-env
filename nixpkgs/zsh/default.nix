@@ -233,10 +233,20 @@ let
         if [ "$GIT_CLEAN" -eq "1" ]; then
             STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
         fi
-        if [ "$HOME" = "$PWD" ]; then
-            WORKDIR=" "
+        git_root=$PWD
+        while [[ $git_root != / && ! -e $git_root/.git ]]; do
+          git_root=$git_root:h
+        done
+        if [[ $git_root = / ]]; then
+          unset git_root
+          if [ "$PWD" = "$HOME" ]; then
+            WORKDIR="$ZSH_THEME_GIT_PROMPT_HOME%{$reset_color%}"
+          else
+            WORKDIR="%{$fg[blue]%}%3~%{$reset_color%}"
+          fi
         else
-            WORKDIR="%3~"
+          parent=''${git_root%\/*}
+          WORKDIR="%{$fg[blue]%}''${PWD#$parent/}"
         fi
         PROMPT="%(?.%{$fg[white]%}.%{$fg[red]%})$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
         RPROMPT="$STATUS%{$reset_color%} $ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SUFFIX $WORKDIR"
@@ -256,6 +266,11 @@ let
       ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg_bold[red]%}"
       ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}"
       ZSH_THEME_GIT_PROMPT_CLEAN=""
+      if [ -n "$SSH_TTY" ]; then
+        ZSH_THEME_GIT_PROMPT_HOME="%{$fg[magenta]%} "
+      else
+        ZSH_THEME_GIT_PROMPT_HOME="%{$fg[blue]%} "
+      fi
     '';
   };
 in
