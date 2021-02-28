@@ -207,28 +207,28 @@ let
     text = ''
       git_prompt_status() {
         precmd_update_git_vars
-        STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX%{$reset_color%}"
+        STATUS="%{$reset_color%}$ZSH_THEME_GIT_PROMPT_PREFIX"
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
         if [ "$GIT_STASHED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STASHED%{$reset_color%}"
+            STATUS="$STATUS%{$fg_bold[blue]%}$ZSH_THEME_GIT_PROMPT_STASHED%{$reset_color%}"
         fi
         if [ "$GIT_UNTRACKED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
+            STATUS="$STATUS%{$fg[red]%}$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
         fi
         if [ "$GIT_STAGED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED%{$reset_color%}"
+            STATUS="$STATUS%{$fg_bold[yellow]%}$ZSH_THEME_GIT_PROMPT_STAGED%{$reset_color%}"
         fi
         if [ "$GIT_CONFLICTS" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS%{$reset_color%}"
+            STATUS="$STATUS%{$fg[red]%}$ZSH_THEME_GIT_PROMPT_CONFLICTS%{$reset_color%}"
         fi
         if [ "$GIT_CHANGED" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED%{$reset_color%}"
+            STATUS="$STATUS%{$fg_bold[red]%}$ZSH_THEME_GIT_PROMPT_CHANGED%{$reset_color%}"
         fi
         if [ "$GIT_BEHIND" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{$reset_color%}"
+            STATUS="$STATUS%{$fg_bold[red]%}$GIT_BEHIND$ZSH_THEME_GIT_PROMPT_BEHIND%{$reset_color%}"
         fi
         if [ "$GIT_AHEAD" -ne "0" ]; then
-            STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{$reset_color%}"
+            STATUS="$STATUS%{$fg[green]%}$GIT_AHEAD$ZSH_THEME_GIT_PROMPT_AHEAD%{$reset_color%}"
         fi
         if [ "$GIT_CLEAN" -eq "1" ]; then
             STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
@@ -240,17 +240,17 @@ let
         if [[ $git_root = / ]]; then
           unset git_root
           if [ "$PWD" = "$HOME" ]; then
-            WORKDIR="$ZSH_THEME_GIT_PROMPT_HOME%{$reset_color%}"
+            WORKDIR="%{$fg[blue]%}$ZSH_THEME_GIT_PROMPT_HOME%{$reset_color%}"
           else
             WORKDIR="%{$fg[blue]%}%3~%{$reset_color%}"
           fi
         else
           parent=''${git_root%\/*}
-          WORKDIR="%{$fg[blue]%}''${PWD#$parent/}"
+          WORKDIR="%{$fg[blue]%}''${PWD#$parent/}%{$reset_color%}"
         fi
         PROMPT="%(?.%{$fg[white]%}.%{$fg[red]%})$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
         PS2="%{$reset_color%}%{$fg_bold[red]%}$ZSH_THEME_GIT_PROMPT_PROMPT2%{$reset_color%}"
-        RPROMPT="$STATUS%{$reset_color%} $ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SUFFIX $WORKDIR"
+        RPROMPT="$STATUS%{$reset_color%} %{$fg_bold[magenta]%}$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH$ZSH_THEME_GIT_PROMPT_SUFFIX $WORKDIR"
       }
       autoload -U add-zsh-hook
       add-zsh-hook precmd git_prompt_status
@@ -259,19 +259,19 @@ let
       ZSH_THEME_GIT_PROMPT_SEPARATOR=""
       ZSH_THEME_GIT_PROMPT_PROMPT=""
       ZSH_THEME_GIT_PROMPT_PROMPT2="  "
-      ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
-      ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[yellow]%} "
-      ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%} "
-      ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg_bold[red]%} "
-      ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%} "
-      ZSH_THEME_GIT_PROMPT_STASHED="%{$fg_bold[blue]%} "
-      ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg_bold[red]%}"
-      ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}"
+      ZSH_THEME_GIT_PROMPT_BRANCH=""
+      ZSH_THEME_GIT_PROMPT_STAGED=" "
+      ZSH_THEME_GIT_PROMPT_CONFLICTS=" "
+      ZSH_THEME_GIT_PROMPT_CHANGED=" "
+      ZSH_THEME_GIT_PROMPT_UNTRACKED=" "
+      ZSH_THEME_GIT_PROMPT_STASHED=" "
+      ZSH_THEME_GIT_PROMPT_BEHIND=""
+      ZSH_THEME_GIT_PROMPT_AHEAD=""
       ZSH_THEME_GIT_PROMPT_CLEAN=""
       if [ -n "$SSH_TTY" ]; then
-        ZSH_THEME_GIT_PROMPT_HOME="%{$fg[magenta]%} "
+        ZSH_THEME_GIT_PROMPT_HOME=" "
       else
-        ZSH_THEME_GIT_PROMPT_HOME="%{$fg[blue]%} "
+        ZSH_THEME_GIT_PROMPT_HOME=" "
       fi
     '';
   };
