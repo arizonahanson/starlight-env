@@ -207,8 +207,8 @@ let
     text = ''
       PROMPT=" "
       git_prompt_status() {
-          update_current_git_vars
-          #if [ -n "$__CURRENT_GIT_STATUS" ]; then
+          precmd_update_git_vars
+          if [ -n "$__CURRENT_GIT_STATUS" ]; then
             STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX %{''${reset_color}%}"
             STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
             if [ "$GIT_STASHED" -ne "0" ]; then
@@ -237,7 +237,7 @@ let
             fi
             STATUS="$STATUS%{''${reset_color}%} $ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{''${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
             echo "$STATUS"
-          #fi
+          fi
       }
       ZSH_THEME_GIT_PROMPT_PREFIX=""
       ZSH_THEME_GIT_PROMPT_SUFFIX=""
@@ -411,6 +411,7 @@ pkgs.stdenv.mkDerivation {
       if [ ! "\$TERM" = "linux" ]; then
         echo -ne "\\e[5 q"
       fi
+      precmd_update_git_vars
     }
     # Load the aliases.
     . "\$ZDOTDIR/.zsh_aliases"
