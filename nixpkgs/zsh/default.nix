@@ -201,6 +201,20 @@ let
       .gitignore 38;5;${toString cfg.theme.fg-alt}
     '';
   };
+  zshtheme = pkgs.writeTextFile {
+    name = "zshtheme";
+    destination = "/themes/starlight.zsh-theme";
+    text = ''
+      PROMPT=" "
+      RPROMPT="$(git_super_status)"
+      ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[grey]%}(%{$fg[red]%}"
+      ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+      ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[grey]%}) %{$fg[yellow]%}⚡%{$reset_color%}"
+      ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[grey]%})"
+      ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="%{$fg_bold[magenta]%}%{$reset_color%}"
+      ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="%{$fg_bold[magenta]%}%{$reset_color%}"
+      ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%{$fg_bold[magenta]%}↕%{$reset_color%}"    '';
+  };
 in
 pkgs.stdenv.mkDerivation {
   name = "myzsh";
@@ -214,6 +228,7 @@ pkgs.stdenv.mkDerivation {
     zsh-completions
     zsh-syntax-highlighting
     (dircolors)
+    (zshtheme)
   ];
   FZF_TMUX = "1";
   FZF_DEFAULT_COMMAND = "ag -f -g '' --hidden --depth 16 --ignore dosdevices";
@@ -259,7 +274,8 @@ pkgs.stdenv.mkDerivation {
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.zsh_history"
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
-    ZSH_THEME="example"
+    ZSH_THEME="starlight"
+    ZSH_CUSTOM="${zshtheme}"
     plugins=(git colored-man-pages git-prompt)
     eval \$(dircolors -b ${dircolors}/etc/dircolors)
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
