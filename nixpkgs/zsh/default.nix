@@ -49,6 +49,7 @@ pkgs.stdenv.mkDerivation {
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
     ZSH_THEME="robbyrussell"
     plugins=(git colored-man-pages)
+    autoload -U colors && colors
     source \$ZSH/oh-my-zsh.sh
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
