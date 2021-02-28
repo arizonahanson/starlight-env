@@ -288,6 +288,34 @@ pkgs.stdenv.mkDerivation {
       source "\$HOME/.zshrc"
     fi
     source \$ZSH/oh-my-zsh.sh
+    # vi-like editing
+    bindkey -v
+    # save prompt status
+    zle-line-init() {
+      typeset -g __prompt_status="\$?"
+    }
+    zle -N zle-line-init
+    zle-keymap-select () {
+      if [ ! "\$TERM" = "linux" ]; then
+        if [ \$KEYMAP = vicmd ]; then
+          echo -ne "\\e[1 q"
+        else
+          if [[ \$ZLE_STATE == *insert* ]]; then
+            echo -ne "\\e[5 q"
+          else
+            echo -ne "\\e[3 q"
+          fi
+        fi
+      fi
+      () { return \$__prompt_status }
+      zle reset-prompt
+    }
+    zle -N zle-keymap-select
+    precmd() {
+      if [ ! "$TERM" = "linux" ]; then
+        echo -ne "\e[5 q"
+      fi
+    }
     # Load the aliases.
     if [ -f ~/.zsh_aliases ]; then
         . ~/.zsh_aliases
