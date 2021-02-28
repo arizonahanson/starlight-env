@@ -215,6 +215,15 @@ pkgs.stdenv.mkDerivation {
     zsh-syntax-highlighting
     (dircolors)
   ];
+  FZF_TMUX = "1";
+  FZF_DEFAULT_COMMAND = "ag -f -g '' --hidden --depth 16 --ignore dosdevices";
+  FZF_CTRL_T_COMMAND = "ag -f -g '' --hidden --depth 16 --ignore dosdevices";
+  FZF_DEFAULT_OPTS = "-m --ansi --no-bold --color=dark,fg:${toString cfg.theme.fg},bg:${toString cfg.theme.bg},hl:${toString cfg.theme.match},fg+:${toString cfg.theme.select},bg+:${toString cfg.theme.bg},hl+:${toString cfg.theme.match},info:${toString cfg.theme.bg-alt},border:${toString cfg.theme.fg-alt},prompt:${toString cfg.theme.fg-alt},pointer:${toString cfg.theme.select},marker:${toString cfg.theme.select},spinner:${toString cfg.theme.info},header:${toString cfg.theme.fg-alt} --tac";
+  FZF_ALT_C_COMMAND = "find -L . -maxdepth 16 -type d 2>/dev/null";
+  GREP_COLORS = "mt=38;5;${toString cfg.theme.match}:sl=:cx=:fn=38;5;${toString cfg.theme.path}:ln=38;5;${toString cfg.theme.bg-alt}:bn=38;5;${toString cfg.theme.number}:se=38;5;${toString cfg.theme.fg-alt}";
+  # shorter delay on cmd-mode
+  KEYTIMEOUT = "1";
+  LESS = "-erFX";
   installPhase = ''
     makeWrapper "${pkgs.zsh}/bin/zsh" "$out/bin/zsh" --set ZDOTDIR $out
 
@@ -256,6 +265,10 @@ pkgs.stdenv.mkDerivation {
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    # fzf with tmux
+    source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+    source ${pkgs.fzf}/share/fzf/completion.zsh
+    zstyle ':completion:*:default' list-colors \''${(s.:.)LS_COLORS} ma='38;5;${toString cfg.theme.select}'
     export ZSH_HIGHLIGHT_STYLES[cursor]='fg=${toString cfg.theme.select}'
     export ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=${toString cfg.theme.match}'
     export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=${toString cfg.theme.error}'
@@ -284,17 +297,41 @@ pkgs.stdenv.mkDerivation {
     export ZSH_AUTOSUGGEST_STRATEGY=("match_prev_cmd")
     ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=vi-forward-char
     #ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=""
-    bindkey '^ ' autosuggest-accept
     # better 'help'
     autoload -Uz run-help
     unalias run-help
     alias help=run-help
+    # spellcheck commands
+    setopt correct
     if test -r "\$HOME/.zshrc"; then
       source "\$HOME/.zshrc"
     fi
     source \$ZSH/oh-my-zsh.sh
+    # keep zcompdump in tmpfs
+    autoload -U compinit && compinit -d "$XDG_CACHE_HOME/zcompdump"
     # vi-like editing
     bindkey -v
+    bindkey '^ ' autosuggest-accept
+    # backspace
+    bindkey -a '^?' vi-backward-delete-char
+    # home
+    bindkey -a '\\e[1~' vi-first-non-blank
+    bindkey '\\e[1~' vi-first-non-blank
+    # insert
+    bindkey -a '\\e[2~' vi-insert
+    bindkey '\\e[2~' vi-insert # noop?
+    # delete
+    bindkey '\\e[3~' vi-delete-char
+    bindkey -a '\\e[3~' vi-delete-char
+    # end
+    bindkey -a '\\e[4~'  vi-end-of-line
+    bindkey '\\e[4~'  vi-end-of-line
+    bindkey  "\''${terminfo[khome]}" vi-beginning-of-line
+    bindkey -a "\''${terminfo[khome]}" vi-beginning-of-line
+    bindkey  "\''${terminfo[kend]}" vi-end-of-line
+    bindkey -a "\''${terminfo[kend]}" vi-end-of-line
+    # complete word
+    bindkey '^w' vi-forward-word
     # save prompt status
     zle-line-init() {
       typeset -g __prompt_status="\$?"
