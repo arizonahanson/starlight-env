@@ -59,6 +59,7 @@ pkgs.stdenv.mkDerivation {
     gnupg
     gnused
     gnutar
+    less
     makeWrapper
     man-db
     nixpkgs-fmt
