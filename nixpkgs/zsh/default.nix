@@ -208,12 +208,12 @@ let
     text = ''
       git_prompt_status() {
         git_root=$PWD
+        unset STATUS
         while [[ $git_root != / && ! -e $git_root/.git ]]; do
           git_root=$git_root:h
         done
         if [ ! $git_root = / ]; then
           precmd_update_git_vars
-          unset STATUS
           GIT_STASHED=$(git stash list 2>/dev/null | wc -l)
           if [ "$GIT_UNTRACKED" -ne "0" ]; then
               STATUS="$STATUS${toFG cfg.theme.diff-remove}$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
@@ -239,8 +239,8 @@ let
           if [ "$GIT_CLEAN" -eq "1" ]; then
               STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
           fi
-          STATUS="%{$reset_color%}$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_SEPARATOR"''${STATUS:+"$STATUS "}
-          STATUS="$STATUS${toFG cfg.theme.currentBranch}$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{$reset_color%} "
+          STATUS="%{$reset_color%}$ZSH_THEME_GIT_PROMPT_PREFIX"''${STATUS:+"$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"}
+          STATUS="$STATUS${toFG cfg.theme.currentBranch}$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SEPARATOR"
           parent=''${git_root%\/*}
           WORKDIR="${toFG cfg.theme.path}''${PWD#$parent/}%{$reset_color%}"
         else
@@ -259,7 +259,7 @@ let
       add-zsh-hook precmd git_prompt_status
       ZSH_THEME_GIT_PROMPT_PREFIX=""
       ZSH_THEME_GIT_PROMPT_SUFFIX=""
-      ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+      ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
       ZSH_THEME_GIT_PROMPT_PROMPT=""
       ZSH_THEME_GIT_PROMPT_PROMPT2="   "
       ZSH_THEME_GIT_PROMPT_BRANCH=""
