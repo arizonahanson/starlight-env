@@ -213,9 +213,9 @@ let
         done
         if [ ! $git_root = / ]; then
           precmd_update_git_vars
+          GIT_STASHED=$(git stash list 2>/dev/null | wc -l)
           STATUS="%{$reset_color%}$ZSH_THEME_GIT_PROMPT_PREFIX"
           STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
-          GIT_STASHED=$(git stash list 2>/dev/null | wc -l)
           if [ "$GIT_UNTRACKED" -ne "0" ]; then
               STATUS="$STATUS${toFG cfg.theme.diff-remove}$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
           fi
@@ -243,13 +243,13 @@ let
           parent=''${git_root%\/*}
           WORKDIR="${toFG cfg.theme.path}''${PWD#$parent/}%{$reset_color%}"
         else
-          unset git_root
           if [ "$PWD" = "$HOME" ]; then
             WORKDIR="${toFG cfg.theme.path}$ZSH_THEME_GIT_PROMPT_HOME%{$reset_color%}"
           else
             WORKDIR="${toFG cfg.theme.path}%3~%{$reset_color%}"
           fi
         fi
+        unset git_root
         PROMPT="%(?.${toFG cfg.theme.fg-alt}.${toFG cfg.theme.error})$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
         PS2="%{$reset_color%}${toFG cfg.theme.warning}$ZSH_THEME_GIT_PROMPT_PROMPT2%{$reset_color%}"
         RPROMPT="$STATUS%{$reset_color%} ${toFG cfg.theme.currentBranch}$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH$ZSH_THEME_GIT_PROMPT_SUFFIX $WORKDIR"
