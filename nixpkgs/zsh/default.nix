@@ -5,6 +5,7 @@ pkgs.stdenv.mkDerivation {
   src = ./.;
   buildInputs = with pkgs; [
     makeWrapper
+    nix-zsh-completions
     oh-my-zsh
     zsh
     zsh-autosuggestions
@@ -51,6 +52,7 @@ pkgs.stdenv.mkDerivation {
     source \$ZSH/oh-my-zsh.sh
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
     if test -r "\$HOME/.zshrc"; then
       source "\$HOME/.zshrc"
     fi
