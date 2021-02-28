@@ -239,6 +239,9 @@ let
             echo "$STATUS"
           fi
       }
+      add-zsh-hook chpwd update_current_git_vars
+      add-zsh-hook precmd precmd_update_git_vars
+      add-zsh-hook preexec preexec_update_git_vars
       ZSH_THEME_GIT_PROMPT_PREFIX=""
       ZSH_THEME_GIT_PROMPT_SUFFIX=""
       ZSH_THEME_GIT_PROMPT_SEPARATOR=""
@@ -411,7 +414,6 @@ pkgs.stdenv.mkDerivation {
       if [ ! "\$TERM" = "linux" ]; then
         echo -ne "\\e[5 q"
       fi
-      precmd_update_git_vars
     }
     # Load the aliases.
     . "\$ZDOTDIR/.zsh_aliases"
