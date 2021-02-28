@@ -17,6 +17,7 @@ let
       number = 14;
       boolean = 5;
       constant = 13;
+      executable = 2;
       function = 6;
       type = 4;
       statement = 12;
@@ -29,6 +30,7 @@ let
       diff-remove = 1;
       staged = 11;
       currentBranch = 12;
+      socket = 12;
       diff-add-moved = 10;
       diff-remove-moved = 9;
       localBranch = 4;
