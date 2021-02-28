@@ -259,7 +259,7 @@ pkgs.stdenv.mkDerivation {
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.zsh_history"
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
-    ZSH_THEME="random"
+    ZSH_THEME="example"
     plugins=(git colored-man-pages git-prompt)
     eval \$(dircolors -b ${dircolors}/etc/dircolors)
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
@@ -296,8 +296,6 @@ pkgs.stdenv.mkDerivation {
     export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${toString cfg.theme.bg-alt}"
     export ZSH_AUTOSUGGEST_STRATEGY=("match_prev_cmd")
     ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=vi-forward-char
-    #ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=""
-    # better 'help'
     autoload -Uz run-help
     unalias run-help
     alias help=run-help
