@@ -249,17 +249,20 @@ pkgs.stdenv.mkDerivation {
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.zsh_history"
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
-    ZSH_THEME="agnoster"
+    ZSH_THEME="random"
     plugins=(git colored-man-pages)
-    autoload -U colors && colors
-    source \$ZSH/oh-my-zsh.sh
     eval \$(dircolors -b ${dircolors}/etc/dircolors)
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    # better 'help'
+    autoload -Uz run-help
+    unalias run-help
+    alias help=run-help
     if test -r "\$HOME/.zshrc"; then
       source "\$HOME/.zshrc"
     fi
+    source \$ZSH/oh-my-zsh.sh
     # Load the aliases.
     if [ -f ~/.zsh_aliases ]; then
         . ~/.zsh_aliases
