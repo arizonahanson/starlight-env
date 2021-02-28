@@ -240,6 +240,7 @@ let
           if [ "$GIT_CLEAN" -eq "1" ]; then
               STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
           fi
+          STATUS="$STATUS${toFG cfg.theme.currentBranch}$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{$reset_color%} "
           parent=''${git_root%\/*}
           WORKDIR="${toFG cfg.theme.path}''${PWD#$parent/}%{$reset_color%}"
         else
@@ -252,7 +253,7 @@ let
         unset git_root
         PROMPT="%(?.${toFG cfg.theme.fg-alt}.${toFG cfg.theme.error})$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
         PS2="%{$reset_color%}${toFG cfg.theme.warning}$ZSH_THEME_GIT_PROMPT_PROMPT2%{$reset_color%}"
-        RPROMPT="$STATUS%{$reset_color%} ${toFG cfg.theme.currentBranch}$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH$ZSH_THEME_GIT_PROMPT_SUFFIX $WORKDIR"
+        RPROMPT="$STATUS$WORKDIR$ZSH_THEME_GIT_PROMPT_SUFFIX"
       }
       autoload -U add-zsh-hook
       add-zsh-hook precmd git_prompt_status
@@ -261,7 +262,7 @@ let
       ZSH_THEME_GIT_PROMPT_SEPARATOR=""
       ZSH_THEME_GIT_PROMPT_PROMPT=""
       ZSH_THEME_GIT_PROMPT_PROMPT2="   "
-      ZSH_THEME_GIT_PROMPT_BRANCH=""
+      ZSH_THEME_GIT_PROMPT_BRANCH=" "
       ZSH_THEME_GIT_PROMPT_STAGED=" "
       ZSH_THEME_GIT_PROMPT_CONFLICTS=" "
       ZSH_THEME_GIT_PROMPT_CHANGED=" "
