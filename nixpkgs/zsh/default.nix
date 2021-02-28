@@ -312,8 +312,8 @@ pkgs.stdenv.mkDerivation {
     }
     zle -N zle-keymap-select
     precmd() {
-      if [ ! "$TERM" = "linux" ]; then
-        echo -ne "\e[5 q"
+      if [ ! "\$TERM" = "linux" ]; then
+        echo -ne "\\e[5 q"
       fi
     }
     # Load the aliases.
