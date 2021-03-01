@@ -213,7 +213,6 @@ let
           git_root=$git_root:h
         done
         if [ ! $git_root = / ]; then
-          precmd_update_git_vars
           GIT_STASHED=$(git stash list 2>/dev/null | wc -l)
           if [ "$GIT_UNTRACKED" -ne "0" ]; then
               STATUS="$STATUS${toFG cfg.theme.diff-remove}$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
