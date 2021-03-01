@@ -7,7 +7,7 @@ pkgs.stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/etc
     cat > $out/etc/tmux.conf <<EOF
-    set -g history-limit 50000
+    set -g history-limit 65535
     set -g display-time 4000
     set -g focus-events on
     setw -g aggressive-resize on
@@ -27,6 +27,7 @@ pkgs.stdenv.mkDerivation {
     setw -g window-status-format " #W "
     set -g base-index 1
     setw -g pane-base-index 1
+    #set -g word-separators " /@,=\"-"
 
     # default statusbar colors
     set-option -g status-style bg=colour${toString cfg.theme.bg},fg=colour${toString cfg.theme.fg}
@@ -52,11 +53,15 @@ pkgs.stdenv.mkDerivation {
     # clock
     set-window-option -g clock-mode-colour colour${toString cfg.theme.accent}
 
-    # bindings
+    # better vi-like bindings
     set -g mode-keys vi
     set -g status-keys "vi"
-    bind -T copy-mode-vi v send-keys -X begin-selection
-    bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+    bind-key -T copy-mode-vi Home "send-keys -X start-of-line"
+    bind-key -T copy-mode-vi End "send-keys -X end-of-line"
+    unbind-key -T copy-mode-vi v
+    bind-key -T copy-mode-vi v "send-keys -X begin-selection"
+    unbind-key -T copy-mode-vi y
+    bind-key -T copy-mode-vi y "send-keys -X copy-selection-and-cancel"
     bind '"' split-window -c "#{pane_current_path}"
     bind % split-window -h -c "#{pane_current_path}"
     bind c new-window -c "#{pane_current_path}"
