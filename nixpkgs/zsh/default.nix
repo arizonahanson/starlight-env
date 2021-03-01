@@ -397,6 +397,7 @@ pkgs.stdenv.mkDerivation {
     # complete word
     bindkey '^w' vi-forward-word
     bindkey '^ ' autosuggest-accept
+    bindkey '^G' fzf-cd-widget
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     # keep zcompdump in tmpfs
     autoload -U compinit && compinit -d "$XDG_CACHE_HOME/zcompdump"
