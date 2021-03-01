@@ -58,7 +58,7 @@ pkgs.stdenv.mkDerivation {
   # shorter delay on cmd-mode
   KEYTIMEOUT = "1";
   LESS = "-erFX";
-  buildInputs = with pkgs; [
+  nativeBuildInputs = with pkgs; [
     ag
     calc
     coreutils
