@@ -437,7 +437,7 @@ pkgs.stdenv.mkDerivation {
     alias l="ls -hF";
     alias la="ls -AhF";
     alias ll="ls -lAhF";
-    alias lt="tree -aFC -I .git";
+    alias lt="tree -aFC -I .git -L 2";
     alias cp="cp --reflink=auto";
     alias xz="xz --threads=0";
     alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${toString cfg.theme.bg-alt}' --color-path '38;5;${toString cfg.theme.path}' --color-match '38;5;${toString cfg.theme.match}'";
