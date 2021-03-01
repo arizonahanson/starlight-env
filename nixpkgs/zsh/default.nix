@@ -433,6 +433,7 @@ pkgs.stdenv.mkDerivation {
     fi
     EOF
     cat > $out/.zsh_aliases <<EOF
+    unalias ls
     alias ls="ls --color";
     alias l="ls -hF";
     alias la="ls -AhF";
