@@ -58,6 +58,7 @@ pkgs.stdenv.mkDerivation {
   # shorter delay on cmd-mode
   KEYTIMEOUT = "1";
   LESS = "-erFX";
+  TIGRC_USER = "${cfg.pkgs.mygit}/etc/tigrc";
   nativeBuildInputs = with pkgs; [
     ag
     calc

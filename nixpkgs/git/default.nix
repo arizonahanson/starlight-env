@@ -75,16 +75,17 @@
           branch = ${toString cfg.theme.currentBranch}
           localBranch = ${toString cfg.theme.currentBranch}
           remoteBranch = ${toString cfg.theme.remoteBranch}
-        [tig "color"]
-          cursor = ${toString cfg.theme.select} default
-          date = ${toString cfg.theme.bg-alt} default
-          graph-commit = ${toString cfg.theme.fg-alt} default
-          line-number = ${toString cfg.theme.bg-alt} default
-          main-tracked = ${toString cfg.theme.currentBranch} default
-          search-result = ${toString cfg.theme.match} default
-          status = ${toString cfg.theme.info} default
-          title-blur = ${toString cfg.theme.bg-alt} default
-          title-focus = ${toString cfg.theme.fg} ${toString cfg.theme.bg-alt}
+      EOF
+      cat >> $out/etc/tigrc << EOF
+      color cursor ${toString cfg.theme.select} default
+      color date ${toString cfg.theme.bg-alt} default
+      color graph-commit ${toString cfg.theme.fg-alt} default
+      color line-number ${toString cfg.theme.bg-alt} default
+      color main-tracked ${toString cfg.theme.currentBranch} default
+      color search-result ${toString cfg.theme.match} default
+      color status ${toString cfg.theme.info} default
+      color title-blur ${toString cfg.theme.bg-alt} default
+      color title-focus ${toString cfg.theme.fg} ${toString cfg.theme.bg-alt}
       EOF
       wrapProgram $out/bin/git --add-flags "-c 'include.path=$out/etc/gitconfig'"
     '';
