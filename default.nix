@@ -49,6 +49,15 @@ pkgs.stdenv.mkDerivation {
   name = "starlight-env";
   src = ./.;
   EDITOR = "${cfg.pkgs.myvim}/bin/vim";
+  FZF_TMUX = "1";
+  FZF_DEFAULT_COMMAND = "ag -f -g '' --hidden --depth 16 --ignore dosdevices";
+  FZF_CTRL_T_COMMAND = "ag -f -g '' --hidden --depth 16 --ignore dosdevices";
+  FZF_DEFAULT_OPTS = "-m --ansi --no-bold --color=dark,fg:${toString cfg.theme.fg},bg:${toString cfg.theme.bg},hl:${toString cfg.theme.match},fg+:${toString cfg.theme.select},bg+:${toString cfg.theme.bg},hl+:${toString cfg.theme.match},info:${toString cfg.theme.bg-alt},border:${toString cfg.theme.fg-alt},prompt:${toString cfg.theme.fg-alt},pointer:${toString cfg.theme.select},marker:${toString cfg.theme.select},spinner:${toString cfg.theme.info},header:${toString cfg.theme.fg-alt} --tac";
+  FZF_ALT_C_COMMAND = "find -L . -maxdepth 16 -type d 2>/dev/null";
+  GREP_COLORS = "mt=38;5;${toString cfg.theme.match}:sl=:cx=:fn=38;5;${toString cfg.theme.path}:ln=38;5;${toString cfg.theme.bg-alt}:bn=38;5;${toString cfg.theme.number}:se=38;5;${toString cfg.theme.fg-alt}";
+  # shorter delay on cmd-mode
+  KEYTIMEOUT = "1";
+  LESS = "-erFX";
   buildInputs = with pkgs; [
     ag
     calc

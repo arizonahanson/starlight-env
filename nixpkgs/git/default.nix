@@ -3,6 +3,7 @@
 (pkgs.git.overrideAttrs (
   oldAttrs: rec {
     doInstallCheck = false;
+    osxkeychainSupport = cfg.darwin;
     preFixup = ''
       mkdir -p $out/etc
       cat >> $out/etc/gitconfig << EOF
