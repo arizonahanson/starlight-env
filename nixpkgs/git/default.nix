@@ -3,7 +3,7 @@
 (pkgs.git.overrideAttrs (
   oldAttrs: rec {
     doInstallCheck = false;
-    osxkeychainSupport = cfg.darwin;
+    osxkeychainSupport = pkgs.stdenv.isDarwin;
     preFixup = ''
       mkdir -p $out/etc
       cat >> $out/etc/gitconfig << EOF
@@ -155,5 +155,5 @@
   pythonSupport = false;
   perlSupport = false;
   withManual = false; # time consuming
-  withLibsecret = !cfg.darwin;
+  withLibsecret = !pkgs.stdenv.isDarwin;
 }

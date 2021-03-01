@@ -6,14 +6,14 @@ let
   homeDir = builtins.getEnv "HOME";
 in
 (vim_configurable.override {
-  darwinSupport = cfg.darwin;
+  darwinSupport = pkgs.stdenv.isDarwin;
   guiSupport = "no";
   luaSupport = false;
   netbeansSupport = false;
   perlSupport = false;
   pythonSupport = false;
   rubySupport = false;
-  ximSupport = !cfg.darwin;
+  ximSupport = !pkgs.stdenv.isDarwin;
 }).customize
 {
   name = "myvim";
