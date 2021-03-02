@@ -335,7 +335,7 @@ pkgs.stdenv.mkDerivation {
     # fzf with tmux
     source ${pkgs.fzf}/share/fzf/key-bindings.zsh
     source ${pkgs.fzf}/share/fzf/completion.zsh
-    zstyle ':completion:*:default' list-colors \''${(s.:.)LS_COLORS} ma='38;5;${toString cfg.theme.select}'
+    zstyle ':completion:*:default' list-colors \''${(s.:.)LS_COLORS} ma='48;5;${toString cfg.theme.bg-alt};38;5;${toString cfg.theme.select}'
     source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     export ZSH_HIGHLIGHT_STYLES[cursor]='fg=${toString cfg.theme.select}'
