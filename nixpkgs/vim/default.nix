@@ -1,6 +1,4 @@
-{ cfg
-, pkgs ? import <nixpkgs> { }
-}:
+{ cfg, pkgs ? import <nixpkgs> { } }:
 let
   inherit (pkgs) lib buildEnv vim_configurable;
   homeDir = builtins.getEnv "HOME";
