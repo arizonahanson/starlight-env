@@ -41,6 +41,7 @@ let
       mytmux = (import ./nixpkgs/tmux { inherit cfg pkgs; });
       myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
       myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
+      javalsp = (import ./nixpkgs/javalsp { inherit cfg pkgs; });
     };
   };
 in
@@ -89,6 +90,7 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.mytmux)
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
+    (cfg.pkgs.javalsp)
     (writeScriptBin "dde-install"
       "${nix}/bin/nix-env -i starlight-env -f https://github.com/isaacwhanson/starlight-env/archive/main.tar.gz")
   ];

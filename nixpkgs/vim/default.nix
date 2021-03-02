@@ -3,7 +3,6 @@
 }:
 let
   inherit (pkgs) lib buildEnv vim_configurable;
-  homeDir = builtins.getEnv "HOME";
 in
 (vim_configurable.override {
   darwinSupport = pkgs.stdenv.isDarwin;
@@ -25,7 +24,7 @@ in
         let g:ale_completion_delay=1000
         let g:ale_cache_executable_check_failures=1
         let g:ale_close_preview_on_insert=1
-        let g:ale_java_javalsp_executable='${homeDir}/opt/java-language-server/dist/lang_server_mac.sh'
+        let g:ale_java_javalsp_executable='${cfg.pkgs.javalsp}/bin/lang_server'
         let g:ale_fixers={
           \ 'nix': ['nixpkgs-fmt'],
           \ 'java': ['uncrustify'],
