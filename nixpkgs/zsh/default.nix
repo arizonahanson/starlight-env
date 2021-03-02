@@ -305,22 +305,6 @@ pkgs.stdenv.mkDerivation {
     fi
     EOF
 
-    cat > $out/.zprofile <<EOF
-    # Only execute this file once per login shell.
-    if [ -n "\$__ZDOT_ZPROFILE_SOURCED" ]; then return; fi
-    __ZDOT_ZPROFILE_SOURCED=1
-    if test -r "\$HOME/.zprofile"; then
-      source "\$HOME/.zprofile"
-    fi
-    # Setup login shell init stuff.
-    if [ -n "\$XDG_CACHE_HOME" ]; then
-      mkdir -p "\$XDG_CACHE_HOME"
-    fi
-    if [ -n "\$XDG_CONFIG_HOME" ]; then
-      mkdir -p "\$XDG_CONFIG_HOME"
-    fi
-    EOF
-
     cat > $out/.zshrc <<EOF
     # Only execute this file once per interactive shell.
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
@@ -399,8 +383,8 @@ pkgs.stdenv.mkDerivation {
     bindkey '^ ' autosuggest-accept
     bindkey '^G' fzf-cd-widget
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    # keep zcompdump in tmpfs
-    autoload -U compinit && compinit -d "$XDG_CACHE_HOME/zcompdump"
+    # keep zcompdump in tmp
+    autoload -U compinit && compinit -d "$TMP/.$USER/zcompdump"
     # save prompt status
     zle-line-init() {
       typeset -g __prompt_status="\$?"

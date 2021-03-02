@@ -51,7 +51,7 @@ in
         let g:go_highlight_functions=1
         let g:go_highlight_operators=1
         let g:go_highlight_build_constraints=1
-        let g:vimcache='/tmp/.'.$USER.'/vim/'
+        let g:vimcache='/'.$TMP.'/.'.$USER.'/vim/'
         let g:gutentags_cache_dir=g:vimcache.'ctags//'
         let g:gutentags_exclude_filetypes=["gitcommit", "gitrebase"]
         let g:latex_to_unicode_file_types=["gitcommit", "gitrebase", "markdown", "julia", ""]
