@@ -91,7 +91,7 @@ pkgs.stdenv.mkDerivation {
       remoteBranch = ${toString cfg.theme.remoteBranch}
     EOF
     cat >> $out/etc/tigrc << EOF
-    color cursor ${toString cfg.theme.select} ${toString cfg.theme.bg-alt}
+    color cursor ${toString cfg.theme.select} default
     color date ${toString cfg.theme.bg-alt} default
     color graph-commit ${toString cfg.theme.fg-alt} default
     color line-number ${toString cfg.theme.bg-alt} default
