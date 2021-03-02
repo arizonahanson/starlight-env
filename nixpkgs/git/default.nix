@@ -91,15 +91,34 @@ pkgs.stdenv.mkDerivation {
       remoteBranch = ${toString cfg.theme.remoteBranch}
     EOF
     cat >> $out/etc/tigrc << EOF
-    color cursor ${toString cfg.theme.select} default
-    color date ${toString cfg.theme.bg-alt} default
-    color graph-commit ${toString cfg.theme.fg-alt} default
-    color line-number ${toString cfg.theme.bg-alt} default
-    color main-tracked ${toString cfg.theme.currentBranch} default
-    color search-result ${toString cfg.theme.match} default
+    set line-graphics = auto
+    set ignore-case  = smart-case
+    color cursor ${toString cfg.theme.select} ${toString cfg.theme.bg-alt}
     color status ${toString cfg.theme.info} default
-    color title-blur ${toString cfg.theme.bg-alt} default
     color title-focus ${toString cfg.theme.fg} ${toString cfg.theme.bg-alt}
+    color title-blur ${toString cfg.theme.bg-alt} default
+    color search-result ${toString cfg.theme.match} default
+    color delimiter ${toString cfg.theme.bg-alt} default
+    color line-number ${toString cfg.theme.bg-alt} default
+    color date ${toString cfg.theme.bg-alt} default
+    color directory ${toString cfg.theme.path} default
+    color file ${toString cfg.theme.path} default
+    color graph-commit ${toString cfg.theme.fg-alt} default
+    color palette-0 2 default
+    color palette-1 10 default
+    color palette-2 6 default
+    color palette-3 14 default
+    color palette-4 4 default
+    color palette-5 12 default
+    color palette-6 5 default
+    color palette-7 13 default
+    color palette-8 1 default
+    color palette-9 9 default
+    color palette-10 3 default
+    color palette-11 11 default
+    color palette-12 7 default
+    color palette-13 15 default
+    color main-tracked ${toString cfg.theme.currentBranch} default
     bind generic h scroll-left
     bind generic j move-down
     bind generic k move-up
