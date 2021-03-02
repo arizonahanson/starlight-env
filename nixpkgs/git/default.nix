@@ -156,8 +156,9 @@ pkgs.stdenv.mkDerivation {
     bind generic up stage-update-part
     bind generic us stage-split-chunk
     bind generic c  none
-    bind generic cc !git commit -a
-    bind generic ca !?@git commit --amend --no-edit
+    bind generic cc !?git commit -a
+    bind generic ca !?@git commit --amend
+    bind generic cp !?@git push -u
     bind generic K view-help
     bind generic <C-w><C-w> view-next
     EOF
