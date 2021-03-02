@@ -97,7 +97,7 @@ pkgs.stdenv.mkDerivation {
     color status ${toString cfg.theme.info} default
     color title-focus ${toString cfg.theme.fg} ${toString cfg.theme.bg-alt}
     color title-blur ${toString cfg.theme.bg-alt} default
-    color search-result ${toString cfg.theme.match} default
+    color search-result ${toString cfg.theme.match} ${toString cfg.theme.bg-alt}
     color delimiter ${toString cfg.theme.bg-alt} default
     color line-number ${toString cfg.theme.bg-alt} default
     color date ${toString cfg.theme.bg-alt} default
@@ -118,7 +118,23 @@ pkgs.stdenv.mkDerivation {
     color palette-11 11 default
     color palette-12 7 default
     color palette-13 15 default
+    color main-head ${toString cfg.theme.localBranch} default
     color main-tracked ${toString cfg.theme.currentBranch} default
+    color main-remote ${toString cfg.theme.remoteBranch} default
+    color main-tag ${toString cfg.theme.constant} default
+    color main-local-tag ${toString cfg.theme.constant} default
+    color main-ref ${toString cfg.theme.remoteBranch} default
+    color stat-staged ${toString cfg.theme.staged} default
+    color stat-unstaged ${toString cfg.theme.diff-change} default
+    color stat-untracked ${toString cfg.theme.diff-remove} default
+    color diff-header ${toString cfg.theme.bg-alt} default
+    color diff-chunk ${toString cfg.theme.fg-alt} default
+    color diff-stat ${toString cfg.theme.path} default
+    color diff-add ${toString cfg.theme.diff-add} default
+    color diff-add2 ${toString cfg.theme.diff-add-moved} default
+    color diff-del ${toString cfg.theme.diff-remove} default
+    color diff-del2 ${toString cfg.theme.diff-remove-moved} default
+    color diff-index ${toString cfg.theme.bg-alt} default
     bind generic h scroll-left
     bind generic j move-down
     bind generic k move-up
