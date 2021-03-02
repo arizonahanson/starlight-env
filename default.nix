@@ -1,6 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 let
   cfg = {
+    url = "https://github.com/isaacwhanson/starlight-env/archive/main.tar.gz";
     theme = {
       fg = 15;
       fg-alt = 7;
@@ -90,10 +91,10 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
     (writeScriptBin "dde-install"
-      "${nix}/bin/nix-env -i starlight-env -f https://github.com/isaacwhanson/starlight-env/archive/main.tar.gz")
+      "${nix}/bin/nix-env -i starlight-env -f ${cfg.url}")
   ];
   installPhase = ''
-    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "$src"
+    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "${cfg.url}"
   '';
   shellHook = ''
     SHELL="${cfg.pkgs.myzsh}/bin/zsh"
