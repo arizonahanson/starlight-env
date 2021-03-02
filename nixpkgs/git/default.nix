@@ -15,12 +15,14 @@ let mygit =
   };
 in
 pkgs.stdenv.mkDerivation {
-  name = "mygit";
+  name = "mygitrc";
   src = ./.;
   buildInputs = [ (mygit) pkgs.makeWrapper ];
   installPhase = ''
     mkdir -p $out/etc
     cat >> $out/etc/gitconfig << EOF
+    [include]
+      path = ${mygit}/etc/gitconfig
     [core]
       autocrlf = false
       filemode = true
