@@ -61,6 +61,7 @@ pkgs.stdenv.mkDerivation {
     [color "diff"]
       commit = ${cfg.theme.fg-alt}
       frag = ${cfg.theme.fg-alt}
+      func = ${cfg.theme.function}
       meta = ${cfg.theme.bg-alt}
       new = ${cfg.theme.diff-add}
       newMoved = ${cfg.theme.diff-add-moved}
