@@ -59,7 +59,7 @@ pkgs.stdenv.mkDerivation {
       match = ${cfg.theme.match}
       separator = ${cfg.theme.fg-alt}
     [color "diff"]
-      commit = ${cfg.theme.fg-alt}
+      commit = ${cfg.theme.number}
       frag = ${cfg.theme.fg-alt}
       func = ${cfg.theme.function}
       meta = ${cfg.theme.bg-alt}
@@ -101,6 +101,7 @@ pkgs.stdenv.mkDerivation {
     color search-result ${cfg.theme.match} ${cfg.theme.bg-alt}
     color delimiter ${cfg.theme.bg-alt} default
     color line-number ${cfg.theme.bg-alt} default
+    color id ${cfg.theme.number} default
     color date ${cfg.theme.bg-alt} default
     color directory ${cfg.theme.path} default
     color file ${cfg.theme.path} default
@@ -136,6 +137,7 @@ pkgs.stdenv.mkDerivation {
     color diff-del ${cfg.theme.diff-remove} default
     color diff-del2 ${cfg.theme.diff-remove-moved} default
     color diff-index ${cfg.theme.bg-alt} default
+    color commit ${cfg.theme.number} default
     bind generic h scroll-left
     bind generic j move-down
     bind generic k move-up
