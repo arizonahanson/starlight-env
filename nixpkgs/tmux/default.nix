@@ -30,28 +30,28 @@ pkgs.stdenv.mkDerivation {
     #set -g word-separators " /@,=\"-"
 
     # default statusbar colors
-    set-option -g status-style bg=colour${toString cfg.theme.bg},fg=colour${toString cfg.theme.fg}
+    set-option -g status-style bg=colour${cfg.theme.bg},fg=colour${cfg.theme.fg}
     # default window title colors
-    set-window-option -g window-status-style fg=colour${toString cfg.theme.bg-alt},bg=colour${toString cfg.theme.bg}
+    set-window-option -g window-status-style fg=colour${cfg.theme.bg-alt},bg=colour${cfg.theme.bg}
     # active window title colors
-    set-window-option -g window-status-current-style fg=colour${toString cfg.theme.fg},bg=colour${toString cfg.theme.bg}
+    set-window-option -g window-status-current-style fg=colour${cfg.theme.fg},bg=colour${cfg.theme.bg}
     # inactive window activity colors
-    set-window-option -g window-status-activity-style fg=colour${toString cfg.theme.fg-alt},bg=colour${toString cfg.theme.bg}
-    set-window-option -g window-status-bell-style fg=colour${toString cfg.theme.info},bg=colour${toString cfg.theme.bg}
+    set-window-option -g window-status-activity-style fg=colour${cfg.theme.fg-alt},bg=colour${cfg.theme.bg}
+    set-window-option -g window-status-bell-style fg=colour${cfg.theme.info},bg=colour${cfg.theme.bg}
 
     # pane border
-    set-option -g pane-border-style fg=colour${toString cfg.theme.bg-alt}
-    set-option -g pane-active-border-style fg=colour${toString cfg.theme.accent}
+    set-option -g pane-border-style fg=colour${cfg.theme.bg-alt}
+    set-option -g pane-active-border-style fg=colour${cfg.theme.accent}
 
     # message text
-    set-option -g message-style bg=colour${toString cfg.theme.bg},fg=colour${toString cfg.theme.fg}
+    set-option -g message-style bg=colour${cfg.theme.bg},fg=colour${cfg.theme.fg}
 
     # pane number display
-    set-option -g display-panes-active-colour colour${toString cfg.theme.fg}
-    set-option -g display-panes-colour colour${toString cfg.theme.fg-alt}
+    set-option -g display-panes-active-colour colour${cfg.theme.fg}
+    set-option -g display-panes-colour colour${cfg.theme.fg-alt}
 
     # clock
-    set-window-option -g clock-mode-colour colour${toString cfg.theme.accent}
+    set-window-option -g clock-mode-colour colour${cfg.theme.accent}
 
     # better vi-like bindings
     set -g mode-keys vi

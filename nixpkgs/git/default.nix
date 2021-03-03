@@ -54,56 +54,56 @@ pkgs.stdenv.mkDerivation {
     [color]
       ui = auto
     [color "grep"]
-      filename = ${toString cfg.theme.path}
-      linenumber = ${toString cfg.theme.bg-alt}
-      match = ${toString cfg.theme.match}
-      separator = ${toString cfg.theme.fg-alt}
+      filename = ${cfg.theme.path}
+      linenumber = ${cfg.theme.bg-alt}
+      match = ${cfg.theme.match}
+      separator = ${cfg.theme.fg-alt}
     [color "diff"]
-      commit = ${toString cfg.theme.fg-alt}
-      frag = ${toString cfg.theme.fg-alt}
-      meta = ${toString cfg.theme.bg-alt}
-      new = ${toString cfg.theme.diff-add}
-      newMoved = ${toString cfg.theme.diff-add-moved}
-      old = ${toString cfg.theme.diff-remove}
-      oldMoved = ${toString cfg.theme.diff-remove-moved}
+      commit = ${cfg.theme.fg-alt}
+      frag = ${cfg.theme.fg-alt}
+      meta = ${cfg.theme.bg-alt}
+      new = ${cfg.theme.diff-add}
+      newMoved = ${cfg.theme.diff-add-moved}
+      old = ${cfg.theme.diff-remove}
+      oldMoved = ${cfg.theme.diff-remove-moved}
     [color "branch"]
-      current = ${toString cfg.theme.currentBranch}
-      local = ${toString cfg.theme.localBranch}
-      remote = ${toString cfg.theme.remoteBranch}
+      current = ${cfg.theme.currentBranch}
+      local = ${cfg.theme.localBranch}
+      remote = ${cfg.theme.remoteBranch}
     [color "decorate"]
-      HEAD = ${toString cfg.theme.localBranch}
-      branch = ${toString cfg.theme.currentBranch}
-      remoteBranch = ${toString cfg.theme.remoteBranch}
-      stash = ${toString cfg.theme.localBranch}
-      tag = ${toString cfg.theme.remoteBranch}
+      HEAD = ${cfg.theme.localBranch}
+      branch = ${cfg.theme.currentBranch}
+      remoteBranch = ${cfg.theme.remoteBranch}
+      stash = ${cfg.theme.localBranch}
+      tag = ${cfg.theme.remoteBranch}
     [color "remote"]
-      hint = ${toString cfg.theme.fg-alt}
-      success = ${toString cfg.theme.info}
-      warning = ${toString cfg.theme.warning}
-      error = ${toString cfg.theme.error}
+      hint = ${cfg.theme.fg-alt}
+      success = ${cfg.theme.info}
+      warning = ${cfg.theme.warning}
+      error = ${cfg.theme.error}
     [color "status"]
-      header = ${toString cfg.theme.bg-alt}
-      added = ${toString cfg.theme.staged}
-      changed = ${toString cfg.theme.diff-change}
-      untracked = ${toString cfg.theme.diff-remove}
-      branch = ${toString cfg.theme.currentBranch}
-      localBranch = ${toString cfg.theme.currentBranch}
-      remoteBranch = ${toString cfg.theme.remoteBranch}
+      header = ${cfg.theme.bg-alt}
+      added = ${cfg.theme.staged}
+      changed = ${cfg.theme.diff-change}
+      untracked = ${cfg.theme.diff-remove}
+      branch = ${cfg.theme.currentBranch}
+      localBranch = ${cfg.theme.currentBranch}
+      remoteBranch = ${cfg.theme.remoteBranch}
     EOF
     cat >> $out/etc/tigrc << EOF
     set line-graphics = auto
     set ignore-case  = smart-case
-    color cursor ${toString cfg.theme.select} ${toString cfg.theme.bg-alt}
-    color status ${toString cfg.theme.info} default
-    color title-focus ${toString cfg.theme.fg} ${toString cfg.theme.bg-alt}
-    color title-blur ${toString cfg.theme.bg-alt} default
-    color search-result ${toString cfg.theme.match} ${toString cfg.theme.bg-alt}
-    color delimiter ${toString cfg.theme.bg-alt} default
-    color line-number ${toString cfg.theme.bg-alt} default
-    color date ${toString cfg.theme.bg-alt} default
-    color directory ${toString cfg.theme.path} default
-    color file ${toString cfg.theme.path} default
-    color graph-commit ${toString cfg.theme.fg-alt} default
+    color cursor ${cfg.theme.select} ${cfg.theme.bg-alt}
+    color status ${cfg.theme.info} default
+    color title-focus ${cfg.theme.fg} ${cfg.theme.bg-alt}
+    color title-blur ${cfg.theme.bg-alt} default
+    color search-result ${cfg.theme.match} ${cfg.theme.bg-alt}
+    color delimiter ${cfg.theme.bg-alt} default
+    color line-number ${cfg.theme.bg-alt} default
+    color date ${cfg.theme.bg-alt} default
+    color directory ${cfg.theme.path} default
+    color file ${cfg.theme.path} default
+    color graph-commit ${cfg.theme.fg-alt} default
     color palette-0 2 default
     color palette-1 10 default
     color palette-2 6 default
@@ -118,23 +118,23 @@ pkgs.stdenv.mkDerivation {
     color palette-11 11 default
     color palette-12 7 default
     color palette-13 15 default
-    color main-head ${toString cfg.theme.localBranch} default
-    color main-tracked ${toString cfg.theme.currentBranch} default
-    color main-remote ${toString cfg.theme.remoteBranch} default
-    color main-tag ${toString cfg.theme.constant} default
-    color main-local-tag ${toString cfg.theme.constant} default
-    color main-ref ${toString cfg.theme.remoteBranch} default
-    color stat-staged ${toString cfg.theme.staged} default
-    color stat-unstaged ${toString cfg.theme.diff-change} default
-    color stat-untracked ${toString cfg.theme.diff-remove} default
-    color diff-header ${toString cfg.theme.bg-alt} default
-    color diff-chunk ${toString cfg.theme.fg-alt} default
-    color diff-stat ${toString cfg.theme.path} default
-    color diff-add ${toString cfg.theme.diff-add} default
-    color diff-add2 ${toString cfg.theme.diff-add-moved} default
-    color diff-del ${toString cfg.theme.diff-remove} default
-    color diff-del2 ${toString cfg.theme.diff-remove-moved} default
-    color diff-index ${toString cfg.theme.bg-alt} default
+    color main-head ${cfg.theme.localBranch} default
+    color main-tracked ${cfg.theme.currentBranch} default
+    color main-remote ${cfg.theme.remoteBranch} default
+    color main-tag ${cfg.theme.constant} default
+    color main-local-tag ${cfg.theme.constant} default
+    color main-ref ${cfg.theme.remoteBranch} default
+    color stat-staged ${cfg.theme.staged} default
+    color stat-unstaged ${cfg.theme.diff-change} default
+    color stat-untracked ${cfg.theme.diff-remove} default
+    color diff-header ${cfg.theme.bg-alt} default
+    color diff-chunk ${cfg.theme.fg-alt} default
+    color diff-stat ${cfg.theme.path} default
+    color diff-add ${cfg.theme.diff-add} default
+    color diff-add2 ${cfg.theme.diff-add-moved} default
+    color diff-del ${cfg.theme.diff-remove} default
+    color diff-del2 ${cfg.theme.diff-remove-moved} default
+    color diff-index ${cfg.theme.bg-alt} default
     bind generic h scroll-left
     bind generic j move-down
     bind generic k move-up

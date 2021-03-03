@@ -82,46 +82,46 @@ in
         set cursorline
         autocmd FileType gitcommit setlocal spell spelllang=en_us
         autocmd FileType markdown setlocal spell spelllang=en_us
-        highlight Normal ctermbg=NONE ctermfg=${toString cfg.theme.fg} ctermul=NONE cterm=NONE
-        highlight Noise ctermbg=NONE ctermfg=${toString cfg.theme.fg-alt} cterm=NONE
-        highlight Identifier ctermbg=NONE ctermfg=${toString cfg.theme.substitution} cterm=NONE
-        highlight Comment ctermbg=NONE ctermfg=${toString cfg.theme.bg-alt} cterm=NONE
+        highlight Normal ctermbg=NONE ctermfg=${cfg.theme.fg} ctermul=NONE cterm=NONE
+        highlight Noise ctermbg=NONE ctermfg=${cfg.theme.fg-alt} cterm=NONE
+        highlight Identifier ctermbg=NONE ctermfg=${cfg.theme.substitution} cterm=NONE
+        highlight Comment ctermbg=NONE ctermfg=${cfg.theme.bg-alt} cterm=NONE
         highlight CursorLine ctermbg=NONE ctermfg=NONE cterm=NONE
-        highlight Visual ctermbg=${toString cfg.theme.bg-alt} cterm=NONE
-        highlight StatusLine ctermbg=${toString cfg.theme.bg-alt} ctermfg=fg cterm=NONE
-        highlight StatusLineNC ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.fg-alt} cterm=NONE
-        highlight WildMenu ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.select} cterm=NONE
-        highlight PmenuThumb ctermfg=${toString cfg.theme.fg-alt}
-        highlight Underlined ctermbg=NONE ctermfg=${toString cfg.theme.path} cterm=underline
-        highlight IncSearch ctermbg=NONE ctermfg=${toString cfg.theme.match} cterm=underline
-        highlight Search ctermbg=NONE ctermfg=${toString cfg.theme.match} cterm=NONE
-        highlight String ctermfg=${toString cfg.theme.string}
-        highlight Character ctermfg=${toString cfg.theme.character}
-        highlight Number ctermfg=${toString cfg.theme.number}
-        highlight Boolean ctermfg=${toString cfg.theme.boolean}
-        highlight Constant ctermfg=${toString cfg.theme.constant}
-        highlight Function ctermfg=${toString cfg.theme.function}
-        highlight Type ctermfg=${toString cfg.theme.type}
-        highlight Statement ctermfg=${toString cfg.theme.statement}
-        highlight Keyword ctermfg=${toString cfg.theme.keyword}
-        highlight Error ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.error}
-        highlight Warning ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.warning}
-        highlight Todo ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.info}
-        highlight ErrorMsg ctermbg=NONE ctermfg=${toString cfg.theme.error}
-        highlight WarningMsg ctermbg=NONE ctermfg=${toString cfg.theme.warning}
-        highlight InfoMsg ctermbg=NONE ctermfg=${toString cfg.theme.info}
-        highlight DiffAdd ctermbg=NONE ctermfg=${toString cfg.theme.diff-add}
-        highlight DiffChange ctermbg=NONE ctermfg=${toString cfg.theme.diff-change}
-        highlight DiffDelete ctermbg=NONE ctermfg=${toString cfg.theme.diff-remove}
-        highlight DiffText ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.diff-change} cterm=NONE
-        highlight gitcommitSelectedType ctermbg=NONE ctermfg=${toString cfg.theme.staged} cterm=NONE
-        highlight gitcommitBranch ctermbg=NONE ctermfg=${toString cfg.theme.currentBranch}
-        highlight User1 ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.info} cterm=NONE
-        highlight User2 ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.diff-change} cterm=NONE
-        highlight User3 ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.currentBranch} cterm=NONE
-        highlight User4 ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.fg-alt} cterm=NONE
-        highlight User5 ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.number} cterm=NONE
-        highlight User6 ctermbg=${toString cfg.theme.bg-alt} ctermfg=${toString cfg.theme.type} cterm=NONE
+        highlight Visual ctermbg=${cfg.theme.bg-alt} cterm=NONE
+        highlight StatusLine ctermbg=${cfg.theme.bg-alt} ctermfg=fg cterm=NONE
+        highlight StatusLineNC ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.fg-alt} cterm=NONE
+        highlight WildMenu ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.select} cterm=NONE
+        highlight PmenuThumb ctermfg=${cfg.theme.fg-alt}
+        highlight Underlined ctermbg=NONE ctermfg=${cfg.theme.path} cterm=underline
+        highlight IncSearch ctermbg=NONE ctermfg=${cfg.theme.match} cterm=underline
+        highlight Search ctermbg=NONE ctermfg=${cfg.theme.match} cterm=NONE
+        highlight String ctermfg=${cfg.theme.string}
+        highlight Character ctermfg=${cfg.theme.character}
+        highlight Number ctermfg=${cfg.theme.number}
+        highlight Boolean ctermfg=${cfg.theme.boolean}
+        highlight Constant ctermfg=${cfg.theme.constant}
+        highlight Function ctermfg=${cfg.theme.function}
+        highlight Type ctermfg=${cfg.theme.type}
+        highlight Statement ctermfg=${cfg.theme.statement}
+        highlight Keyword ctermfg=${cfg.theme.keyword}
+        highlight Error ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.error}
+        highlight Warning ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.warning}
+        highlight Todo ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.info}
+        highlight ErrorMsg ctermbg=NONE ctermfg=${cfg.theme.error}
+        highlight WarningMsg ctermbg=NONE ctermfg=${cfg.theme.warning}
+        highlight InfoMsg ctermbg=NONE ctermfg=${cfg.theme.info}
+        highlight DiffAdd ctermbg=NONE ctermfg=${cfg.theme.diff-add}
+        highlight DiffChange ctermbg=NONE ctermfg=${cfg.theme.diff-change}
+        highlight DiffDelete ctermbg=NONE ctermfg=${cfg.theme.diff-remove}
+        highlight DiffText ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.diff-change} cterm=NONE
+        highlight gitcommitSelectedType ctermbg=NONE ctermfg=${cfg.theme.staged} cterm=NONE
+        highlight gitcommitBranch ctermbg=NONE ctermfg=${cfg.theme.currentBranch}
+        highlight User1 ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.info} cterm=NONE
+        highlight User2 ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.diff-change} cterm=NONE
+        highlight User3 ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.currentBranch} cterm=NONE
+        highlight User4 ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.fg-alt} cterm=NONE
+        highlight User5 ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.number} cterm=NONE
+        highlight User6 ctermbg=${cfg.theme.bg-alt} ctermfg=${cfg.theme.type} cterm=NONE
         "--- multiple windows
         set statusline=%<\ %f\ %6*%y\ %1*%(%r\ %)%*%2*%(%m\ %)%*%=%3*%{FugitiveHead()}%*\ %4*%l,%c%V%*\ %5*%B\ %*
         highlight! link VisualNOS Visual
