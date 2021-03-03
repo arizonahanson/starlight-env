@@ -1,5 +1,4 @@
 { cfg, pkgs ? import <nixpkgs> { } }:
-
 let mygit =
   (pkgs.git.overrideAttrs (
     oldAttrs: rec {
@@ -25,7 +24,6 @@ pkgs.stdenv.mkDerivation {
       path = ${mygit}/etc/gitconfig
     [core]
       autocrlf = false
-      filemode = true
     [diff]
       algorithm = minimal
       colorMoved = blocks
@@ -202,4 +200,3 @@ pkgs.stdenv.mkDerivation {
     makeWrapper ${mygit}/bin/git $out/bin/git --add-flags "-c 'include.path=$out/etc/gitconfig'"
   '';
 }
-
