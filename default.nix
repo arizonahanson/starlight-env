@@ -66,9 +66,7 @@ pkgs.stdenv.mkDerivation {
     curl
     findutils
     fzf
-    gcc
     gitAndTools.tig
-    gnumake
     gnupg
     gnused
     gnutar
