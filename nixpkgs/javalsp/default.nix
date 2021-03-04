@@ -34,10 +34,11 @@ pkgs.stdenv.mkDerivation {
     mvn package -DskipTests -Dmaven.repo.local=$out/src/.m2
   '';
   installPhase = ''
-    cp -r $out/src/dist/*${platform}.sh $out/
-    cp -r $out/src/dist/${platform} $out/
-    cp -r $out/src/dist/classpath $out/
-    makeWrapper $out/lang_server_${platform}.sh $out/bin/lang_server
+    mkdir -p $out/libexec
+    cp -r $out/src/dist/*${platform}.sh $out/libexec/
+    cp -r $out/src/dist/${platform} $out/libexec/
+    cp -r $out/src/dist/classpath $out/libexec/
+    makeWrapper $out/libexec/lang_server_${platform}.sh $out/bin/lang_server
     rm -r $out/src
   '';
 }
