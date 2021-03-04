@@ -319,8 +319,8 @@ in
             src = pkgs.fetchFromGitHub {
               owner = "benknoble";
               repo = "vim-auto-origami";
-              rev = "v1.0.0";
-              sha256 = "1zlrafb4lp7rw8kdnaw6spiys6xi3ayamfyzzp0wzl5jy7mv2ayw";
+              rev = "v1.1.6";
+              sha256 = "0q2nqmxc8rm4sg6v37isyj7zdlxh4qv1n80gm44v9b9yyws6bnr1";
             };
           };
         in
