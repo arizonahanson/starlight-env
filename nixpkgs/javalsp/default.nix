@@ -8,7 +8,7 @@ pkgs.stdenv.mkDerivation {
     owner = "georgewfraser";
     repo = "java-language-server";
     rev = "v0.2.32";
-    sha256 = "1yirzpj74ngzv53zdypq8xrca6450b6nr08ivxczifcl8p1b7jkx";
+    sha256 = "1zsdm266jwmjbffd6cahlvlkw2cq7lq1qxnpd3bibpbgc4f45vif";
     leaveDotGit = true;
   };
   buildInputs = with pkgs; [
@@ -17,23 +17,27 @@ pkgs.stdenv.mkDerivation {
     adoptopenjdk-hotspot-bin-13
     maven
     protobuf
-    nodejs
   ];
-  JAVA_HOME = "${pkgs.adoptopenjdk-hotspot-bin-13}/Contents/Home";
   configureScript = ":";
   buildPhase = ''
-    HOME=$out
-    mkdir -pv $out/src
-    cp -r $src/* $out/src/
+    mkdir -p $out
+    cp -r $src $out/src
+    chmod -R ug+rw $out/src
     cd $out/src
-    npm install
-    #./scripts/link_${platform}.sh
-    #./scripts/format.sh
-    mvn package -DskipTests
+    export JAVA_HOME="${pkgs.adoptopenjdk-hotspot-bin-13}";
+    $JAVA_HOME/bin/jlink \
+      --add-modules java.base,java.compiler,java.logging,java.sql,java.xml,jdk.compiler,jdk.jdi,jdk.unsupported,jdk.zipfs \
+      --output dist/${platform} \
+      --no-header-files \
+      --no-man-pages \
+      --compress 2
+    mvn package -DskipTests -Dmaven.repo.local=$out/src/.m2
   '';
   installPhase = ''
-    cp -r $src/src/dist $out/
-    rm -r $src/src
+    cp -r $out/src/dist/*${platform}.sh $out/
+    cp -r $out/src/dist/${platform} $out/
+    cp -r $out/src/dist/classpath $out/
     makeWrapper $out/lang_server_${platform}.sh $out/bin/lang_server
+    rm -r $out/src
   '';
 }
