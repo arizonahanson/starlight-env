@@ -355,6 +355,8 @@ pkgs.stdenv.mkDerivation {
     alias help=run-help
     # spellcheck commands
     setopt correct
+    # turn off completion beeps
+    unsetopt LIST_BEEP
     if test -r "\$HOME/.zshrc"; then
       source "\$HOME/.zshrc"
     fi
