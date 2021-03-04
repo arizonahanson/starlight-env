@@ -50,35 +50,35 @@ let
       #NORMAL 00 # no color code at all
       #FILE 00 # regular file: use no color at all
       RESET 0 # reset to "normal" color
-      DIR 38;5;${toString cfg.theme.path} # directory
+      DIR 38;5;${cfg.theme.path} # directory
       LINK target # symbolic link. (If you set this to 'target' instead of a
        # numerical value, the color is as for the file pointed to.)
       MULTIHARDLINK 00 # regular file with more than one link
-      FIFO 38;5;${toString cfg.theme.socket} # pipe
-      SOCK 38;5;${toString cfg.theme.socket};4 # socket
-      DOOR 38;5;${toString cfg.theme.socket};7 # door
-      BLK 38;5;${toString cfg.theme.string} # block device driver
-      CHR 38;5;${toString cfg.theme.character} # character device driver
-      ORPHAN 38;5;${toString cfg.theme.error} # symlink to nonexistent file, or non-stat'able file ...
-      MISSING 38;5;${toString cfg.theme.bg-alt} # ... and the files they point to
-      SETUID 38;5;${toString cfg.theme.warning} # file that is setuid (u+s)
-      SETGID 38;5;${toString cfg.theme.warning};4 # file that is setgid (g+s)
-      CAPABILITY 38;5;${toString cfg.theme.warning};7 # file with capability
-      STICKY_OTHER_WRITABLE 38;5;${toString cfg.theme.path};4;7 # dir that is sticky and other-writable (+t,o+w)
-      OTHER_WRITABLE 38;5;${toString cfg.theme.path};7 # dir that is other-writable (o+w) and not sticky
-      STICKY 38;5;${toString cfg.theme.path};4 # dir with the sticky bit set (+t) and not other-writable
+      FIFO 38;5;${cfg.theme.socket} # pipe
+      SOCK 38;5;${cfg.theme.socket};4 # socket
+      DOOR 38;5;${cfg.theme.socket};7 # door
+      BLK 38;5;${cfg.theme.string} # block device driver
+      CHR 38;5;${cfg.theme.character} # character device driver
+      ORPHAN 38;5;${cfg.theme.error} # symlink to nonexistent file, or non-stat'able file ...
+      MISSING 38;5;${cfg.theme.bg-alt} # ... and the files they point to
+      SETUID 38;5;${cfg.theme.warning} # file that is setuid (u+s)
+      SETGID 38;5;${cfg.theme.warning};4 # file that is setgid (g+s)
+      CAPABILITY 38;5;${cfg.theme.warning};7 # file with capability
+      STICKY_OTHER_WRITABLE 38;5;${cfg.theme.path};4;7 # dir that is sticky and other-writable (+t,o+w)
+      OTHER_WRITABLE 38;5;${cfg.theme.path};7 # dir that is other-writable (o+w) and not sticky
+      STICKY 38;5;${cfg.theme.path};4 # dir with the sticky bit set (+t) and not other-writable
       # This is for files with execute permission:
-      EXEC 38;5;${toString cfg.theme.executable}
+      EXEC 38;5;${cfg.theme.executable}
       # List any file extensions like '.gz' or '.tar' that you would like ls
       # to colorize below. Put the extension, a space, and the color init string.
       # (and any comments you want to add after a '#')
       # Or if you want to colorize scripts even if they do not have the
       # executable bit actually set.
-      .sh 38;5;${toString cfg.theme.executable}
-      .csh 38;5;${toString cfg.theme.executable}
-      .py 38;5;${toString cfg.theme.function}
-      .js 38;5;${toString cfg.theme.function}
-      .go 38;5;${toString cfg.theme.function}
+      .sh 38;5;${cfg.theme.executable}
+      .csh 38;5;${cfg.theme.executable}
+      .py 38;5;${cfg.theme.function}
+      .js 38;5;${cfg.theme.function}
+      .go 38;5;${cfg.theme.function}
        # archives or compressed
       .tar 01;31
       .tgz 01;31
@@ -196,12 +196,12 @@ let
       .spx 00;36
       .xspf 00;36
       # additional highlighting
-      .pid 38;5;${toString cfg.theme.bg-alt}
-      *~ 38;5;${toString cfg.theme.bg-alt}
-      .gitignore 38;5;${toString cfg.theme.fg-alt}
+      .pid 38;5;${cfg.theme.bg-alt}
+      *~ 38;5;${cfg.theme.bg-alt}
+      .gitignore 38;5;${cfg.theme.fg-alt}
     '';
   };
-  toFG = num: "%{$FG[${pkgs.lib.fixedWidthString 3 "0" (toString num)}]%}";
+  toFG = str: "%{$FG[${pkgs.lib.fixedWidthString 3 "0" str}]%}";
   zshtheme = pkgs.writeTextFile {
     name = "zshtheme";
     destination = "/themes/starlight.zsh-theme";
@@ -305,22 +305,6 @@ pkgs.stdenv.mkDerivation {
     fi
     EOF
 
-    cat > $out/.zprofile <<EOF
-    # Only execute this file once per login shell.
-    if [ -n "\$__ZDOT_ZPROFILE_SOURCED" ]; then return; fi
-    __ZDOT_ZPROFILE_SOURCED=1
-    if test -r "\$HOME/.zprofile"; then
-      source "\$HOME/.zprofile"
-    fi
-    # Setup login shell init stuff.
-    if [ -n "\$XDG_CACHE_HOME" ]; then
-      mkdir -p "\$XDG_CACHE_HOME"
-    fi
-    if [ -n "\$XDG_CONFIG_HOME" ]; then
-      mkdir -p "\$XDG_CONFIG_HOME"
-    fi
-    EOF
-
     cat > $out/.zshrc <<EOF
     # Only execute this file once per interactive shell.
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
@@ -335,34 +319,35 @@ pkgs.stdenv.mkDerivation {
     # fzf with tmux
     source ${pkgs.fzf}/share/fzf/key-bindings.zsh
     source ${pkgs.fzf}/share/fzf/completion.zsh
-    zstyle ':completion:*:default' list-colors \''${(s.:.)LS_COLORS} ma='38;5;${toString cfg.theme.select}'
+    zstyle ':completion:*:default' list-colors \''${(s.:.)LS_COLORS} ma='48;5;${cfg.theme.bg-alt};38;5;${cfg.theme.select}'
     source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    export ZSH_HIGHLIGHT_STYLES[cursor]='fg=${toString cfg.theme.select}'
-    export ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=${toString cfg.theme.match}'
-    export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=${toString cfg.theme.error}'
-    export ZSH_HIGHLIGHT_STYLES[path]='fg=${toString cfg.theme.path}'
-    export ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=${toString cfg.theme.match}'
-    export ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=${toString cfg.theme.pattern}'
-    export ZSH_HIGHLIGHT_STYLES[globbing]='fg=${toString cfg.theme.pattern}'
-    export ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=${toString cfg.theme.character}'
-    export ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=${toString cfg.theme.character}'
-    export ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=${toString cfg.theme.string}'
-    export ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=${toString cfg.theme.function}'
-    export ZSH_HIGHLIGHT_STYLES[alias]='fg=${toString cfg.theme.function}'
-    export ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=${toString cfg.theme.substitution}'
-    export ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=${toString cfg.theme.substitution}'
-    export ZSH_HIGHLIGHT_STYLES[function]='fg=${toString cfg.theme.function}'
-    export ZSH_HIGHLIGHT_STYLES[precommand]='fg=${toString cfg.theme.warning}'
-    export ZSH_HIGHLIGHT_STYLES[command]='fg=${toString cfg.theme.executable}'
-    export ZSH_HIGHLIGHT_STYLES[builtin]='fg=${toString cfg.theme.statement}'
-    export ZSH_HIGHLIGHT_STYLES[redirection]='fg=${toString cfg.theme.keyword}'
-    export ZSH_HIGHLIGHT_STYLES[arg0]='fg=${toString cfg.theme.keyword}'
-    export ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=${toString cfg.theme.keyword}'
-    export ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=${toString cfg.theme.keyword}'
-    export ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=${toString cfg.theme.constant}'
-    export ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=${toString cfg.theme.constant}'
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${toString cfg.theme.bg-alt}"
+    export ZSH_HIGHLIGHT_STYLES[cursor]='fg=${cfg.theme.select}'
+    export ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=${cfg.theme.match}'
+    export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=${cfg.theme.error}'
+    export ZSH_HIGHLIGHT_STYLES[path]='fg=${cfg.theme.path}'
+    export ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=${cfg.theme.match}'
+    export ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=${cfg.theme.pattern}'
+    export ZSH_HIGHLIGHT_STYLES[globbing]='fg=${cfg.theme.pattern}'
+    export ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=${cfg.theme.character}'
+    export ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=${cfg.theme.character}'
+    export ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=${cfg.theme.string}'
+    export ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=${cfg.theme.function}'
+    export ZSH_HIGHLIGHT_STYLES[alias]='fg=${cfg.theme.function}'
+    export ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=${cfg.theme.substitution}'
+    export ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=${cfg.theme.substitution}'
+    export ZSH_HIGHLIGHT_STYLES[function]='fg=${cfg.theme.function}'
+    export ZSH_HIGHLIGHT_STYLES[precommand]='fg=${cfg.theme.warning}'
+    export ZSH_HIGHLIGHT_STYLES[command]='fg=${cfg.theme.executable}'
+    export ZSH_HIGHLIGHT_STYLES[builtin]='fg=${cfg.theme.statement}'
+    export ZSH_HIGHLIGHT_STYLES[redirection]='fg=${cfg.theme.keyword}'
+    export ZSH_HIGHLIGHT_STYLES[arg0]='fg=${cfg.theme.keyword}'
+    export ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=${cfg.theme.keyword}'
+    export ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=${cfg.theme.keyword}'
+    export ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=${cfg.theme.constant}'
+    export ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=${cfg.theme.constant}'
+    export ZSH_HIGHLIGHT_STYLES[assign]='fg=${cfg.theme.fg-alt}'
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${cfg.theme.bg-alt}"
     export ZSH_AUTOSUGGEST_STRATEGY=("match_prev_cmd")
     ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=vi-forward-char
     autoload -Uz run-help
@@ -399,8 +384,8 @@ pkgs.stdenv.mkDerivation {
     bindkey '^ ' autosuggest-accept
     bindkey '^G' fzf-cd-widget
     source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    # keep zcompdump in tmpfs
-    autoload -U compinit && compinit -d "$XDG_CACHE_HOME/zcompdump"
+    # keep zcompdump in tmp
+    autoload -U compinit && compinit -d "$TMP/.$USER/zcompdump"
     # save prompt status
     zle-line-init() {
       typeset -g __prompt_status="\$?"
@@ -442,7 +427,7 @@ pkgs.stdenv.mkDerivation {
     alias lt="tree -aFC -I .git -L 2";
     alias cp="cp --reflink=auto";
     alias xz="xz --threads=0";
-    alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${toString cfg.theme.bg-alt}' --color-path '38;5;${toString cfg.theme.path}' --color-match '38;5;${toString cfg.theme.match}'";
+    alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${cfg.theme.bg-alt}' --color-path '38;5;${cfg.theme.path}' --color-match '38;5;${cfg.theme.match}'";
     EOF
 
     cat > $out/.zlogin <<EOF
