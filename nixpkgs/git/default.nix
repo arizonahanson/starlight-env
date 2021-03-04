@@ -106,19 +106,19 @@ pkgs.stdenv.mkDerivation {
     color directory ${cfg.theme.path} default
     color file ${cfg.theme.path} default
     color graph-commit ${cfg.theme.fg-alt} default
-    color palette-0 2 default
-    color palette-1 10 default
-    color palette-2 6 default
-    color palette-3 14 default
-    color palette-4 4 default
-    color palette-5 12 default
-    color palette-6 5 default
-    color palette-7 13 default
-    color palette-8 1 default
-    color palette-9 9 default
-    color palette-10 3 default
-    color palette-11 11 default
-    color palette-12 7 default
+    color palette-0  4  default
+    color palette-1  12 default
+    color palette-2  5  default
+    color palette-3  13 default
+    color palette-4  1  default
+    color palette-5  9  default
+    color palette-6  3  default
+    color palette-7  11 default
+    color palette-8  2  default
+    color palette-9  10 default
+    color palette-10 6  default
+    color palette-11 14 default
+    color palette-12 7  default
     color palette-13 15 default
     color main-head ${cfg.theme.localBranch} default
     color main-tracked ${cfg.theme.currentBranch} default
