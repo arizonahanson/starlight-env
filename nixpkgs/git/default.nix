@@ -1,22 +1,35 @@
 { cfg, pkgs ? import <nixpkgs> { } }:
-let mygit =
-  (pkgs.git.overrideAttrs (
-    oldAttrs: rec {
-      doInstallCheck = false;
-      osxkeychainSupport = pkgs.stdenv.isDarwin;
-    }
-  )).override {
-    guiSupport = false;
-    pythonSupport = false;
-    perlSupport = false;
-    withManual = false; # time consuming
-    withLibsecret = !pkgs.stdenv.isDarwin;
-  };
+let
+  mygit =
+    (pkgs.git.overrideAttrs (
+      oldAttrs: rec {
+        doInstallCheck = false;
+        osxkeychainSupport = pkgs.stdenv.isDarwin;
+      }
+    )).override {
+      guiSupport = false;
+      pythonSupport = false;
+      perlSupport = false;
+      withManual = false; # time consuming
+      withLibsecret = !pkgs.stdenv.isDarwin;
+    };
+  git-all = (
+    with import <nixpkgs> { }; writeShellScriptBin "git-all" ''
+      echo
+      for repo in $(find -L . -maxdepth 7 -iname '.git' -type d -printf '%P\0' 2>/dev/null | xargs -0 dirname | sort); do
+        echo -e "\e[38;5;${cfg.theme.executable}m  \e[38;5;${cfg.theme.path}m$repo \e[0m(\e[38;5;${cfg.theme.function}m$@\e[0m)"
+        pushd $repo >/dev/null
+        git "$@"
+        popd >/dev/null
+        echo
+      done
+    ''
+  );
 in
 pkgs.stdenv.mkDerivation {
   name = "mygitrc";
   src = ./.;
-  buildInputs = [ (mygit) pkgs.makeWrapper ];
+  buildInputs = [ (mygit) pkgs.makeWrapper git-all ];
   installPhase = ''
     mkdir -p $out/etc
     cat >> $out/etc/gitconfig << EOF
