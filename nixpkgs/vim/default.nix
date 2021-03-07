@@ -10,6 +10,7 @@ in
   perlSupport = false;
   pythonSupport = false;
   rubySupport = false;
+  cscopeSupport = false;
   ximSupport = !pkgs.stdenv.isDarwin;
 }).customize
 {
