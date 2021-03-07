@@ -96,7 +96,6 @@ pkgs.stdenv.mkDerivation {
     makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags $src
   '';
   shellHook = ''
-    SHELL="${cfg.pkgs.myzsh}/bin/zsh"
     exec "${cfg.pkgs.mytmux}/bin/tmux" -2 new-session -A -s starlight
   '';
 }
