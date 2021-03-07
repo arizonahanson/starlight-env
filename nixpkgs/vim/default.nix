@@ -233,8 +233,7 @@ in
         call mkdir(&undodir, 'p', 0700)
         "--- folding
         function AutoFold()
-          let fold_num = auto_origami#Foldcolumn()
-          if fold_num <= 0
+          if auto_origami#Foldcolumn() <= 0 && &foldenable
             setlocal foldmethod=indent
             silent! %foldopen!
             setlocal foldmethod=manual
