@@ -139,7 +139,7 @@ in
         highlight! link TabLineFill CursorLine
         highlight! link Pmenu StatusLineNC
         highlight! link PmenuSbar StatusLineNC
-        highlight! link PmenuSel StatusLine
+        highlight! link PmenuSel WildMenu
         highlight! link Debug SpecialComment
         highlight! link Ignore Comment
         highlight! link VertSplit LineNr
