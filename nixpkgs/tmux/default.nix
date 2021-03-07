@@ -66,6 +66,7 @@ pkgs.stdenv.mkDerivation {
     bind % split-window -h -c "#{pane_current_path}"
     bind c new-window -c "#{pane_current_path}"
     EOF
-    makeWrapper "${pkgs.tmux}/bin/tmux" "$out/bin/tmux" --add-flags "-f '$out/etc/tmux.conf'"
+    makeWrapper "${pkgs.tmux}/bin/tmux" "$out/bin/tmux" --add-flags "-f '$out/etc/tmux.conf'" \
+      --set TZ America/New_York
   '';
 }
