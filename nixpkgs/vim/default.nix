@@ -236,9 +236,9 @@ in
           let fold_num = auto_origami#Foldcolumn()
           if fold_num <= 0
             setlocal foldmethod=indent
-            %foldopen!
+            silent! %foldopen!
             setlocal foldmethod=manual
-            %foldopen!
+            silent! %foldopen!
           endif
           AutoOrigamiFoldColumn
         endfunction
