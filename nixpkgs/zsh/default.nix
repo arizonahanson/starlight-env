@@ -213,7 +213,7 @@ let
           git_root=$git_root:h
         done
         if [ ! $git_root = / ]; then
-          GIT_STASHED=$(git stash list 2>/dev/null | wc -l)
+          GIT_STASHED=$(${cfg.pkgs.mygit}/bin/git stash list 2>/dev/null | wc -l)
           if [ "$GIT_UNTRACKED" -ne "0" ]; then
               STATUS="$STATUS${toFG cfg.theme.diff-remove}$ZSH_THEME_GIT_PROMPT_UNTRACKED%{$reset_color%}"
           fi
@@ -314,7 +314,7 @@ pkgs.stdenv.mkDerivation {
     ZSH_THEME="starlight"
     ZSH_CUSTOM="${zshtheme}"
     plugins=(git colored-man-pages git-prompt)
-    eval \$(dircolors -b ${dircolors}/etc/dircolors)
+    eval \$(${pkgs.coreutils}/bin/dircolors -b ${dircolors}/etc/dircolors)
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
     # fzf with tmux
     source ${pkgs.fzf}/share/fzf/key-bindings.zsh
@@ -422,13 +422,13 @@ pkgs.stdenv.mkDerivation {
     EOF
     cat > $out/.zsh_aliases <<EOF
     unalias ls
-    alias ls="ls --color";
+    alias ls="${pkgs.coreutils}/bin/ls --color";
     alias l="ls -hF";
     alias la="ls -AhF";
     alias ll="ls -lAhF";
-    alias lt="tree -aFC -I .git -L 2";
-    alias cp="cp --reflink=auto";
-    alias xz="xz --threads=0";
+    alias lt="${pkgs.tree}/bin/tree -aFC -I .git -L 2";
+    alias cp="${pkgs.coreutils}/bin/cp --reflink=auto";
+    alias xz="${pkgs.xz}/bin/xz --threads=0";
     alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${cfg.theme.bg-alt}' --color-path '38;5;${cfg.theme.path}' --color-match '38;5;${cfg.theme.match}'";
     EOF
 
