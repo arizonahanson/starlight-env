@@ -22,7 +22,6 @@ in
         let g:ale_completion_delay=1000
         let g:ale_cache_executable_check_failures=1
         let g:ale_close_preview_on_insert=1
-        let g:ale_java_javalsp_executable='${cfg.pkgs.javalsp}/bin/lang_server'
         let g:ale_fixers={
           \ 'nix': ['nixpkgs-fmt'],
           \ 'java': ['uncrustify'],
@@ -55,6 +54,8 @@ in
         let g:gutentags_exclude_filetypes=["gitcommit", "gitrebase"]
         let g:latex_to_unicode_file_types=["gitcommit", "gitrebase", "markdown", "julia", ""]
         let g:netrw_home=g:vimcache.'netrw'
+      '' + pkgs.lib.optionalString ((pkgs.config.javaSupport or false) && pkgs.stdenv.isDarwin) ''
+        let g:ale_java_javalsp_executable='${cfg.pkgs.javalsp}/bin/lang_server'
       '';
       customRC = ''
         "--- important

@@ -89,7 +89,6 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.mytmux)
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
-    (cfg.pkgs.javalsp)
     (writeScriptBin "dde-install"
       "${nix}/bin/nix-env -i starlight-env -f ${cfg.url}")
   ];
