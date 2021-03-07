@@ -232,11 +232,21 @@ in
         let &undodir=g:vimcache.'undo//'
         call mkdir(&undodir, 'p', 0700)
         "--- folding
+        function AutoFold()
+          let fold_num = auto_origami#Foldcolumn()
+          if fold_num <= 0
+            setlocal foldmethod=indent
+            %foldopen!
+            setlocal foldmethod=manual
+            %foldopen!
+          endif
+          AutoOrigamiFoldColumn
+        endfunction
         augroup autofold
           au!
           au BufReadPost * silent! loadview
           au BufReadPost * if auto_origami#Foldcolumn() <= 0 | setlocal foldmethod=indent | endif
-          au CursorHold,BufWinEnter,WinEnter * let &foldcolumn=auto_origami#Foldcolumn()
+          au CursorHold,BufWinEnter,WinEnter * call AutoFold()
           au BufWinEnter * if &foldmethod == "indent" | setlocal foldmethod=manual | silent! :%foldopen! | endif
           au BufUnload * silent! mkview!
         augroup END
