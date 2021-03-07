@@ -90,10 +90,10 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
     (writeScriptBin "dde-install"
-      "${nix}/bin/nix-env -i starlight-env -f ${cfg.url}")
+      "${nix}/bin/nix-env -i starlight-env -f $src")
   ];
   installPhase = ''
-    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "${cfg.url}"
+    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags $src
   '';
   shellHook = ''
     SHELL="${cfg.pkgs.myzsh}/bin/zsh"
