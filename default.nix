@@ -91,6 +91,16 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myzsh)
     (writeScriptBin "dde-install"
       "${nix}/bin/nix-env -i starlight-env -f $src")
+    (writeScriptBin "git-all" ''
+      echo
+      for repo in $(find -L . -maxdepth 7 -iname '.git' -type d -printf '%P\0' 2>/dev/null | xargs -0 dirname | sort); do
+        echo -e "\e[38;5;${cfg.theme.executable}m \e[38;5;${cfg.theme.path}m$repo \e[0m(\e[38;5;${cfg.theme.function}m$@\e[0m)"
+        pushd $repo >/dev/null
+        ${cfg.pkgs.mygit}/bin/git "$@"
+        popd >/dev/null
+        echo
+      done
+    '')
   ];
   installPhase = ''
     makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags $src
