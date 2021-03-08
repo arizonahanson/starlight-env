@@ -250,8 +250,8 @@ let
           fi
         fi
         unset git_root
-        PROMPT="%(?.${toFG cfg.theme.fg-alt}.${toFG cfg.theme.error})$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
-        PS2="%{$reset_color%}${toFG cfg.theme.warning}$ZSH_THEME_GIT_PROMPT_PROMPT2%{$reset_color%}"
+        PROMPT="%(?.${toFG cfg.theme.fg-alt}.${toFG cfg.theme.error})%m$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
+        PS2="%{$reset_color%}${toFG cfg.theme.warning}%_$ZSH_THEME_GIT_PROMPT_PROMPT2%{$reset_color%} "
         RPROMPT="$STATUS$WORKDIR$ZSH_THEME_GIT_PROMPT_SUFFIX"
       }
       autoload -U add-zsh-hook
@@ -260,7 +260,7 @@ let
       ZSH_THEME_GIT_PROMPT_SUFFIX=""
       ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
       ZSH_THEME_GIT_PROMPT_PROMPT=""
-      ZSH_THEME_GIT_PROMPT_PROMPT2="   "
+      ZSH_THEME_GIT_PROMPT_PROMPT2=" "
       ZSH_THEME_GIT_PROMPT_BRANCH=""
       ZSH_THEME_GIT_PROMPT_STAGED=" "
       ZSH_THEME_GIT_PROMPT_CONFLICTS=" "
