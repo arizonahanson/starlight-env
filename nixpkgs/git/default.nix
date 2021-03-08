@@ -108,17 +108,17 @@ pkgs.stdenv.mkDerivation {
     color file ${cfg.theme.path} default
     color graph-commit ${cfg.theme.fg-alt} default
     color palette-0  4  default
-    color palette-1  12 default
+    color palette-1  14 default
     color palette-2  5  default
-    color palette-3  13 default
+    color palette-3  10 default
     color palette-4  1  default
-    color palette-5  9  default
+    color palette-5  11 default
     color palette-6  3  default
-    color palette-7  11 default
+    color palette-7  9  default
     color palette-8  2  default
-    color palette-9  10 default
+    color palette-9  13 default
     color palette-10 6  default
-    color palette-11 14 default
+    color palette-11 12 default
     color palette-12 7  default
     color palette-13 15 default
     color main-head ${cfg.theme.localBranch} default
