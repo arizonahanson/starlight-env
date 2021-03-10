@@ -422,14 +422,22 @@ pkgs.stdenv.mkDerivation {
     EOF
     cat > $out/.zsh_aliases <<EOF
     unalias ls
-    alias ls="${pkgs.coreutils}/bin/ls --color";
-    alias l="ls -hF";
-    alias la="ls -AhF";
-    alias ll="ls -lAhF";
-    alias lt="${pkgs.tree}/bin/tree -aFC -I .git -L 2";
-    alias cp="${pkgs.coreutils}/bin/cp --reflink=auto";
-    alias xz="${pkgs.xz}/bin/xz --threads=0";
-    alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${cfg.theme.bg-alt}' --color-path '38;5;${cfg.theme.path}' --color-match '38;5;${cfg.theme.match}'";
+    alias ls="${pkgs.coreutils}/bin/ls --color"
+    alias l="ls -hF"
+    alias la="ls -AhF"
+    alias ll="ls -lAhF"
+    alias lt="${pkgs.tree}/bin/tree -aFC -I .git -L 2"
+    alias cp="${pkgs.coreutils}/bin/cp --reflink=auto"
+    alias xz="${pkgs.xz}/bin/xz --threads=0"
+    alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${cfg.theme.bg-alt}' --color-path '38;5;${cfg.theme.path}' --color-match '38;5;${cfg.theme.match}'"
+    alias awkf="awk -F: '{print \\\$1}'"
+    alias gdt="git difftool"
+    alias gg="git all"
+    alias ggc="git all gc"
+    alias ggl="git all pull"
+    alias ggs="git all status -sb"
+    alias ggx="git all clean -fxd"
+    alias gx="git clean -fxd"
     EOF
 
     cat > $out/.zlogin <<EOF
