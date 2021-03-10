@@ -91,6 +91,20 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myzsh)
     (writeScriptBin "dde-install"
       "${nix}/bin/nix-env -i starlight-env -f $src")
+    (writeScriptBin "palette" ''
+      #!/usr/bin/env zsh
+      for bold in 0 1; do
+        for col in {0..7}; do
+          echo -en "\e[$bold;3''${col}m $(printf '%X' $((col+bold*8))) "
+        done; echo
+      done; echo
+      for col in 2 6 4 5 1 3 0 7; do
+        echo -en "\e[0;3''${col}m \e[1;3''${col}m "
+      done; echo
+      for col in 2 6 4 5 1 3 0 7; do
+        echo -en "\e[0;3''${col}m$(printf '%X' $col) \e[1;3''${col}m$(printf '%X' $((col+8))) "
+      done; echo
+    '')
     (writeScriptBin "git-all" ''
       echo
       for repo in $(find -L . -maxdepth 7 -iname '.git' -type d -printf '%P\0' 2>/dev/null | xargs -0 dirname | sort); do
