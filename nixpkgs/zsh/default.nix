@@ -313,6 +313,7 @@ pkgs.stdenv.mkDerivation {
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
     ZSH_THEME="starlight"
     ZSH_CUSTOM="${zshtheme}"
+    ZLE_RPROMPT_INDENT=0
     plugins=(git colored-man-pages git-prompt)
     eval \$(${pkgs.coreutils}/bin/dircolors -b ${dircolors}/etc/dircolors)
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
