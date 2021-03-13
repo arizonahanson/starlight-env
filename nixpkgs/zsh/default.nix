@@ -201,7 +201,7 @@ let
       .gitignore 38;5;${cfg.theme.fg-alt}
     '';
   };
-  toFG = str: "%{$FG[${pkgs.lib.fixedWidthString 3 "0" str}]%}";
+  toFG = str: "$FG[${pkgs.lib.fixedWidthString 3 "0" str}]";
   zshtheme = pkgs.writeTextFile {
     name = "zshtheme";
     destination = "/themes/starlight.zsh-theme";
