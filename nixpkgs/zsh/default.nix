@@ -431,7 +431,7 @@ pkgs.stdenv.mkDerivation {
     alias cp="${pkgs.coreutils}/bin/cp --reflink=auto"
     alias xz="${pkgs.xz}/bin/xz --threads=0"
     alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${cfg.theme.bg-alt}' --color-path '38;5;${cfg.theme.path}' --color-match '38;5;${cfg.theme.match}'"
-    alias awkf="awk -F: '{print \\\$1}'"
+    alias awkf="awk -F: '{print \\\$1}' | sort -u"
     alias gdt="git difftool"
     alias gg="git all"
     alias ggc="git all gc"
