@@ -8,8 +8,3 @@ with existing environments. Requires Nix package manager on Linux or macOS.
 
 `nix-shell https://github.com/isaacwhanson/starlight-env/archive/main.tar.gz`
 
-```
-nix-env -i starlight-env https://github.com/isaacwhanson/starlight-env/archive/main.tar.gz
-dde
-```
-
