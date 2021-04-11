@@ -62,36 +62,35 @@ let
       *LS_COLORS 48;5;89;38;5;197;1;3;4;7 # :-)
       # }}}
       # documents {{{1
-      *README               38;5;220;1
-      *README.rst           38;5;220;1
-      *README.md            38;5;220;1
-      *LICENSE              38;5;220;1
-      *COPYING              38;5;220;1
-      *INSTALL              38;5;220;1
-      *COPYRIGHT            38;5;220;1
-      *AUTHORS              38;5;220;1
-      *HISTORY              38;5;220;1
-      *CONTRIBUTORS         38;5;220;1
-      *PATENTS              38;5;220;1
-      *VERSION              38;5;220;1
-      *NOTICE               38;5;220;1
-      *CHANGES              38;5;220;1
+      *README               38;5;253;1
+      *README.rst           38;5;253;1
+      *README.md            38;5;253;1
+      *LICENSE              38;5;253;1
+      *COPYING              38;5;253;1
+      *INSTALL              38;5;253;1
+      *COPYRIGHT            38;5;253;1
+      *AUTHORS              38;5;253;1
+      *CONTRIBUTORS         38;5;253;1
+      *PATENTS              38;5;253;1
+      *VERSION              38;5;253;1
+      *NOTICE               38;5;253;1
+      *CHANGES              38;5;253;1
       .log                  38;5;190
       # plain-text {{{2
       .txt                  38;5;253
       # markup {{{2
-      .adoc                 38;5;184
-      .asciidoc             38;5;184
-      .etx                  38;5;184
-      .info                 38;5;184
-      .markdown             38;5;184
-      .md                   38;5;184
-      .mkd                  38;5;184
-      .nfo                  38;5;184
-      .pod                  38;5;184
-      .rst                  38;5;184
-      .tex                  38;5;184
-      .textile              38;5;184
+      .adoc                 38;5;252
+      .asciidoc             38;5;252
+      .etx                  38;5;252
+      .info                 38;5;252
+      .markdown             38;5;252
+      .md                   38;5;252
+      .mkd                  38;5;252
+      .nfo                  38;5;252
+      .pod                  38;5;252
+      .rst                  38;5;252
+      .tex                  38;5;252
+      .textile              38;5;252
       # key-value, non-relational data {{{2
       .bib                  38;5;178
       .json                 38;5;178
