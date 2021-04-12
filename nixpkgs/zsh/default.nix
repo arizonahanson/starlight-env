@@ -62,57 +62,57 @@ let
       *LS_COLORS 48;5;89;38;5;197;1;3;4;7 # :-)
       # }}}
       # documents {{{1
-      *README               38;5;253;1
-      *README.rst           38;5;253;1
-      *README.md            38;5;253;1
-      *LICENSE              38;5;253;1
-      *COPYING              38;5;253;1
-      *INSTALL              38;5;253;1
-      *COPYRIGHT            38;5;253;1
-      *AUTHORS              38;5;253;1
-      *CONTRIBUTORS         38;5;253;1
-      *PATENTS              38;5;253;1
-      *VERSION              38;5;253;1
-      *NOTICE               38;5;253;1
-      *CHANGES              38;5;253;1
-      .log                  38;5;190
+      *README               38;5;${cfg.theme.fg}
+      *README.rst           38;5;${cfg.theme.fg}
+      *README.md            38;5;${cfg.theme.fg}
+      *LICENSE              38;5;${cfg.theme.fg}
+      *COPYING              38;5;${cfg.theme.fg}
+      *INSTALL              38;5;${cfg.theme.fg}
+      *COPYRIGHT            38;5;${cfg.theme.fg}
+      *AUTHORS              38;5;${cfg.theme.fg}
+      *CONTRIBUTORS         38;5;${cfg.theme.fg}
+      *PATENTS              38;5;${cfg.theme.fg}
+      *VERSION              38;5;${cfg.theme.fg}
+      *NOTICE               38;5;${cfg.theme.fg}
+      *CHANGES              38;5;${cfg.theme.fg}
+      .log                  38;5;${cfg.theme.fg-alt}
       # plain-text {{{2
-      .txt                  38;5;253
+      .txt                  38;5;${cfg.theme.fg-alt}
       # markup {{{2
-      .adoc                 38;5;252
-      .asciidoc             38;5;252
-      .etx                  38;5;252
-      .info                 38;5;252
-      .markdown             38;5;252
-      .md                   38;5;252
-      .mkd                  38;5;252
-      .nfo                  38;5;252
-      .pod                  38;5;252
-      .rst                  38;5;252
-      .tex                  38;5;252
-      .textile              38;5;252
+      .adoc                 38;5;${cfg.theme.fg}
+      .asciidoc             38;5;${cfg.theme.fg}
+      .etx                  38;5;${cfg.theme.fg}
+      .info                 38;5;${cfg.theme.fg}
+      .markdown             38;5;${cfg.theme.fg}
+      .md                   38;5;${cfg.theme.fg}
+      .mkd                  38;5;${cfg.theme.fg}
+      .nfo                  38;5;${cfg.theme.fg}
+      .pod                  38;5;${cfg.theme.fg}
+      .rst                  38;5;${cfg.theme.fg}
+      .tex                  38;5;${cfg.theme.fg}
+      .textile              38;5;${cfg.theme.fg}
       # key-value, non-relational data {{{2
-      .bib                  38;5;178
-      .json                 38;5;178
-      .jsonl                38;5;178
-      .jsonnet              38;5;178
+      .bib                  38;5;${cfg.theme.string}
+      .json                 38;5;${cfg.theme.string}
+      .jsonl                38;5;${cfg.theme.string}
+      .jsonnet              38;5;${cfg.theme.string}
       .libsonnet            38;5;142
-      .ndjson               38;5;178
-      .msg                  38;5;178
-      .pgn                  38;5;178
-      .rss                  38;5;178
-      .xml                  38;5;178
-      .fxml                 38;5;178
-      .toml                 38;5;178
-      .yaml                 38;5;178
-      .yml                  38;5;178
-      .RData                38;5;178
-      .rdata                38;5;178
-      .xsd                  38;5;178
-      .dtd                  38;5;178
-      .sgml                 38;5;178
-      .rng                  38;5;178
-      .rnc                  38;5;178
+      .ndjson               38;5;${cfg.theme.string}
+      .msg                  38;5;${cfg.theme.string}
+      .pgn                  38;5;${cfg.theme.string}
+      .rss                  38;5;${cfg.theme.string}
+      .xml                  38;5;${cfg.theme.string}
+      .fxml                 38;5;${cfg.theme.string}
+      .toml                 38;5;${cfg.theme.string}
+      .yaml                 38;5;${cfg.theme.string}
+      .yml                  38;5;${cfg.theme.string}
+      .RData                38;5;${cfg.theme.string}
+      .rdata                38;5;${cfg.theme.string}
+      .xsd                  38;5;${cfg.theme.string}
+      .dtd                  38;5;${cfg.theme.string}
+      .sgml                 38;5;${cfg.theme.string}
+      .rng                  38;5;${cfg.theme.string}
+      .rnc                  38;5;${cfg.theme.string}
       # }}}
       # binary {{{2
       .cbr                  38;5;141
@@ -354,12 +354,12 @@ let
       .mustache             38;5;125;1
       # }}}
       # java {{{2
-      .coffee               38;5;074;1
-      .java                 38;5;074;1
-      .js                   38;5;074;1
-      .mjs                  38;5;074;1
-      .jsm                  38;5;074;1
-      .jsp                  38;5;074;1
+      .coffee               38;5;10
+      .java                 38;5;10
+      .js                   38;5;10
+      .mjs                  38;5;10
+      .jsm                  38;5;10
+      .jsp                  38;5;10
       # }}}
       # php {{{2
       .php                  38;5;81
@@ -399,26 +399,26 @@ let
       .patch                48;5;197;38;5;232;1
       #}}}
       # graphics {{{1
-      .bmp                  38;5;97
-      .dicom                38;5;97
-      .tiff                 38;5;97
-      .tif                  38;5;97
-      .TIFF                 38;5;97
-      .cdr                  38;5;97
-      .flif                 38;5;97
-      .gif                  38;5;97
-      .icns                 38;5;97
-      .ico                  38;5;97
-      .jpeg                 38;5;97
-      .JPG                  38;5;97
-      .jpg                  38;5;97
-      .nth                  38;5;97
-      .png                  38;5;97
-      .psd                  38;5;97
-      .pxd                  38;5;97
-      .pxm                  38;5;97
-      .xpm                  38;5;97
-      .webp                 38;5;97
+      .bmp                  38;5;12
+      .dicom                38;5;12
+      .tiff                 38;5;12
+      .tif                  38;5;12
+      .TIFF                 38;5;12
+      .cdr                  38;5;12
+      .flif                 38;5;12
+      .gif                  38;5;12
+      .icns                 38;5;12
+      .ico                  38;5;12
+      .jpeg                 38;5;12
+      .JPG                  38;5;12
+      .jpg                  38;5;12
+      .nth                  38;5;12
+      .png                  38;5;12
+      .psd                  38;5;12
+      .pxd                  38;5;12
+      .pxm                  38;5;12
+      .xpm                  38;5;12
+      .webp                 38;5;12
       # }}}
       # vector {{{1
       .ai                   38;5;99
