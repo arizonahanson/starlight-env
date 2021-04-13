@@ -14,7 +14,7 @@ pkgs.stdenv.mkDerivation {
   buildInputs = with pkgs; [
     (cfg.pkgs.mygit)
     makeWrapper
-    adoptopenjdk-hotspot-bin-13
+    adoptopenjdk-hotspot-bin-16
     maven
     protobuf
   ];
@@ -24,7 +24,7 @@ pkgs.stdenv.mkDerivation {
     cp -r $src $out/src
     chmod -R ug+rw $out/src
     cd $out/src
-    export JAVA_HOME="${pkgs.adoptopenjdk-hotspot-bin-13}";
+    export JAVA_HOME="${pkgs.adoptopenjdk-hotspot-bin-16}";
     $JAVA_HOME/bin/jlink \
       --add-modules java.base,java.compiler,java.logging,java.sql,java.xml,jdk.compiler,jdk.jdi,jdk.unsupported,jdk.zipfs \
       --output dist/${platform} \
