@@ -860,7 +860,8 @@ let
           STATUS="%{$reset_color%}$ZSH_THEME_GIT_PROMPT_PREFIX"''${STATUS:+"$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"}
           STATUS="$STATUS${toFG cfg.theme.currentBranch}$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SEPARATOR"
           parent=''${git_root%\/*}
-          WORKDIR="${toFG cfg.theme.path}''${PWD#$parent/}%{$reset_color%}"
+          relative=''${PWD#$parent/}
+          WORKDIR="${toFG cfg.theme.path}''${relative#''${relative%\/*\/*\/*}/}%{$reset_color%}"
         else
           if [ "$PWD" = "$HOME" ]; then
             WORKDIR="${toFG cfg.theme.path}$ZSH_THEME_GIT_PROMPT_HOME%{$reset_color%}"
