@@ -1043,10 +1043,9 @@ pkgs.stdenv.mkDerivation {
     EOF
     cat > $out/.zsh_aliases <<EOF
     unalias ls
-    alias ls="${pkgs.coreutils}/bin/ls --color"
-    alias l="ls -hF"
-    alias la="ls -AhF"
-    alias ll="ls -lAhF"
+    alias l="${pkgs.coreutils}/bin/ls --color -Fh"
+    alias la="l -A"
+    alias ll="la -l"
     alias lt="${pkgs.tree}/bin/tree -aFC -I .git -L 2"
     alias cp="${pkgs.coreutils}/bin/cp --reflink=auto"
     alias xz="${pkgs.xz}/bin/xz --threads=0"
