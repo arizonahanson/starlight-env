@@ -4,39 +4,6 @@ let
     name = "dircolors";
     destination = "/etc/dircolors";
     text = ''
-      #                                    LS_COLORS
-      # Maintainers: Magnus Woldrich <m@japh.se>,
-      #              Ryan Delaney <ryan.patrick.delaney@protonmail.com>
-      #         URL: https://github.com/trapd00r/LS_COLORS
-      #
-      #   This is a collection of extension:color mappings, suitable to use as your
-      #   LS_COLORS environment variable. Most of them use the extended color map,
-      #   described in the ECMA-48 document; in other words, you'll need a terminal
-      #   with capabilities of displaying 256 colors.
-      #
-      #   As of this writing, over 500 different filetypes/extensions are supported.
-      #   That's indeed a lot of extensions, but there's a lot more! Therefore I need
-      #   your help.
-      #
-      #   Fork this project on github, add the extensions you are missing, and send me
-      #   a pull request.
-      #
-      #   For files that usually end up next to each other, like html, css and js,
-      #   try to pick colors that fit nicely together. Filetypes with multiple
-      #   possible extensions, like htm and html, should have the same color.
-
-      # This program is distributed in the hope that it will be useful, but WITHOUT ANY
-      # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-      # PARTICULAR PURPOSE. See the Perl Artistic License for more details.
-      #
-      # This program is free software: you can redistribute it and/or modify it under
-      # the terms of the Perl Artistic License as published by the Perl Foundation,
-      # either version 1.0 of the License, or (at your option) any later version.
-      #
-      # You should have received a copy of the Perl Artistic License along
-      # with this program.  If not, see <http://www.perlfoundation.org/artistic_license_1_0>.
-
-      # core {{{1
       BLK                   38;5;${cfg.theme.string}
       CAPABILITY            38;5;17
       CHR                   38;5;${cfg.theme.character}
@@ -58,9 +25,6 @@ let
       SOCK                  38;5;${cfg.theme.socket}
       STICKY                38;5;86;48;5;234
       STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
-
-      *LS_COLORS 48;5;89;38;5;197;1;3;4;7 # :-)
-      # }}}
       # documents {{{1
       *README               38;5;${cfg.theme.fg}
       *README.rst           38;5;${cfg.theme.fg}
@@ -75,8 +39,8 @@ let
       *VERSION              38;5;${cfg.theme.fg}
       *NOTICE               38;5;${cfg.theme.fg}
       *CHANGES              38;5;${cfg.theme.fg}
-      .log                  38;5;${cfg.theme.fg-alt}
       # plain-text {{{2
+      .log                  38;5;${cfg.theme.fg-alt}
       .txt                  38;5;${cfg.theme.fg-alt}
       # markup {{{2
       .adoc                 38;5;${cfg.theme.fg}
@@ -96,7 +60,7 @@ let
       .json                 38;5;${cfg.theme.string}
       .jsonl                38;5;${cfg.theme.string}
       .jsonnet              38;5;${cfg.theme.string}
-      .libsonnet            38;5;142
+      .libsonnet            38;5;${cfg.theme.string}
       .ndjson               38;5;${cfg.theme.string}
       .msg                  38;5;${cfg.theme.string}
       .pgn                  38;5;${cfg.theme.string}
