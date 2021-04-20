@@ -323,6 +323,7 @@ in
         nnoremap <silent> <F7> :ALEHover<CR>
         nnoremap <silent> <F8> :ALEDetail<CR>
         nnoremap <silent> <F9> :ALEGoToDefinition<CR>
+        nnoremap <silent> gG :GitGutterUndoHunk<CR>
       '';
       plug.plugins =
         let
