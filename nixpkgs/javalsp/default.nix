@@ -14,8 +14,9 @@ pkgs.stdenv.mkDerivation {
   buildInputs = with pkgs; [
     (cfg.pkgs.mygit)
     makeWrapper
-    adoptopenjdk-hotspot-bin-16
+    adoptopenjdk-hotspot-bin-13
     maven
+    nodejs
     protobuf
   ];
   configureScript = ":";
@@ -24,7 +25,12 @@ pkgs.stdenv.mkDerivation {
     cp -r $src $out/src
     chmod -R ug+rw $out/src
     cd $out/src
-    export JAVA_HOME="${pkgs.adoptopenjdk-hotspot-bin-16}";
+    export HOME=$out/src
+    npm config set cache $out/src
+    npm install
+    ./scripts/gen_proto.sh
+    ./scripts/format.sh
+    export JAVA_HOME="${pkgs.adoptopenjdk-hotspot-bin-13}";
     $JAVA_HOME/bin/jlink \
       --add-modules java.base,java.compiler,java.logging,java.sql,java.xml,jdk.compiler,jdk.jdi,jdk.unsupported,jdk.zipfs \
       --output dist/${platform} \
