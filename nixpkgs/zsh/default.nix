@@ -160,10 +160,9 @@ let
       # }}}
       # code {{{1
       # version control {{{2
-      .git                  38;5;197
-      .gitignore            38;5;240
       .gitattributes        38;5;240
       .gitmodules           38;5;240
+      *ignore               38;5;240
 
       # shell {{{2
       .awk                  38;5;172
