@@ -341,8 +341,8 @@ in
           julia-vim
           editorconfig-vim
           (vim-auto-origami)
-          fugitive
-          gitgutter
+          vim-fugitive
+          vim-gitgutter
           vim-gutentags
           ale
         ];
