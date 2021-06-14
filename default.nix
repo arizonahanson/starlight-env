@@ -64,6 +64,7 @@ pkgs.stdenv.mkDerivation {
     ag
     calc
     coreutils
+    ctags
     curl
     findutils
     fzf
@@ -79,7 +80,6 @@ pkgs.stdenv.mkDerivation {
     shellcheck
     tree
     units
-    universal-ctags
     unixtools.whereis
     unzip
     w3m
