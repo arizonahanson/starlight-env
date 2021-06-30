@@ -203,5 +203,6 @@ pkgs.stdenv.mkDerivation {
     bind generic <C-w><C-w> view-next
     EOF
     makeWrapper ${mygit}/bin/git $out/bin/git --add-flags "-c 'include.path=$out/etc/gitconfig'"
+    makeWrapper ${mygit}/bin/git-credential-osxkeychain $out/bin/git-credential-osxkeychain
   '';
 }
