@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 let
   cfg = {
-    url = "https://github.com/isaacwhanson/starlight-env/archive/main.tar.gz";
+    url = "https://github.com/arizonahanson/starlight-env/archive/main.tar.gz";
     theme = {
       fg = "15";
       fg-alt = "7";
