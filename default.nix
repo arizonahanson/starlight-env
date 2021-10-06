@@ -60,7 +60,7 @@ pkgs.stdenv.mkDerivation {
   LESS = "-erFX";
   GREP_COLORS = "mt=38;5;${cfg.theme.match}:sl=:cx=:fn=38;5;${cfg.theme.path}:ln=38;5;${cfg.theme.bg-alt}:bn=38;5;${cfg.theme.number}:se=38;5;${cfg.theme.fg-alt}";
   TIGRC_USER = "${cfg.pkgs.mygit}/etc/tigrc";
-  nativeBuildInputs = with pkgs; [
+  propagatedBuildInputs = with pkgs; [
     ag
     calc
     coreutils
@@ -117,9 +117,10 @@ pkgs.stdenv.mkDerivation {
     '')
   ];
   installPhase = ''
-    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags $src
+    makeWrapper "${cfg.pkgs.mytmux}/bin/tmux" "$out/bin/mytmux" --add-flags "-2 new-session -A -s mytmux"
+    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "$src"
   '';
   shellHook = ''
-    exec "${cfg.pkgs.mytmux}/bin/tmux" -2 new-session -A -s starlight
+    exec mytmux
   '';
 }
