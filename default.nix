@@ -43,10 +43,10 @@ let
       myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
       myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
       javalsp = (import ./nixpkgs/javalsp { inherit cfg pkgs; });
-      azsh-install = pkgs.writeScriptBin "azsh-install" ''
+      azsh-from = pkgs.writeScriptBin "azsh-from" ''
         ${pkgs.nix}/bin/nix-channel --update
         ${pkgs.nix}/bin/nix-env -u
-        ${pkgs.nix}/bin/nix-env -i azsh -f ${cfg.url}
+        ${pkgs.nix}/bin/nix-env -i azsh -f "$1"
       '';
       palette = pkgs.writeScriptBin "palette" ''
         #!/usr/bin/env zsh
@@ -115,7 +115,7 @@ pkgs.stdenv.mkDerivation {
     w3m
     xz
     zip
-    (cfg.pkgs.azsh-install)
+    (cfg.pkgs.azsh-from)
     (cfg.pkgs.git-all)
     (cfg.pkgs.mygit)
     (cfg.pkgs.mytmux)
@@ -130,5 +130,6 @@ pkgs.stdenv.mkDerivation {
   # nix-shell wrapper "azsh"
   installPhase = ''
     makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/azsh" --add-flags "$src"
+    makeWrapper "${cfg.pkgs.azsh-from}/bin/azsh-from" "$out/bin/azsh-pull" --add-flags "${cfg.url}"
   '';
 }
