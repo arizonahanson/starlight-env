@@ -122,6 +122,7 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
     (cfg.pkgs.palette)
+    (writeScriptBin "azsh-install" "${cfg.pkgs.azsh-from}/bin/azsh-from $src")
   ];
   # entry point tmux session
   shellHook = ''
@@ -130,6 +131,6 @@ pkgs.stdenv.mkDerivation {
   # nix-shell wrapper "azsh"
   installPhase = ''
     makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/azsh" --add-flags "$src"
-    makeWrapper "${cfg.pkgs.azsh-from}/bin/azsh-from" "$out/bin/azsh-pull" --add-flags "${cfg.url}"
+    makeWrapper "${cfg.pkgs.azsh-from}/bin/azsh-from" "$out/bin/azsh-update" --add-flags "${cfg.url}"
   '';
 }
