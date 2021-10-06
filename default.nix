@@ -47,7 +47,7 @@ let
   };
 in
 pkgs.stdenv.mkDerivation {
-  name = "starlight-env";
+  name = "azsh";
   src = ./.;
   EDITOR = "${cfg.pkgs.myvim}/bin/vim";
   FZF_TMUX = "1";
@@ -89,8 +89,8 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.mytmux)
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
-    (writeScriptBin "dde-install"
-      "${nix}/bin/nix-env -i starlight-env -f $src")
+    (writeScriptBin "azsh-install"
+      "${nix}/bin/nix-env -i azsh -f ${cfg.url}")
     (writeScriptBin "palette" ''
       #!/usr/bin/env zsh
       for bold in 0 1; do
@@ -117,11 +117,9 @@ pkgs.stdenv.mkDerivation {
     '')
   ];
   installPhase = ''
-    makeWrapper "${cfg.pkgs.mytmux}/bin/tmux" "$out/bin/mytmux" --add-flags "-2 new-session -A -s mytmux"
-    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "$src"
-    makeWrapper "${pkgs.nix}/bin/nix-env" "$out/bin/dde-install" --add-flags "-i starlight-env -f ${cfg.url}"
+    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/azsh" --add-flags "$src"
   '';
   shellHook = ''
-    exec mytmux
+    exec "${cfg.pkgs.mytmux}/bin/tmux" -2 new-session -A -s mytmux
   '';
 }
