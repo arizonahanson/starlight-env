@@ -1,4 +1,4 @@
-{ config ? {}, pkgs ? import <nixpkgs> { } }:
+{ config ? { }, pkgs ? import <nixpkgs> { } }:
 let
   cfg = {
     url = "https://github.com/arizonahanson/starlight-env/archive/main.tar.gz";
@@ -43,6 +43,35 @@ let
       myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
       myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
       javalsp = (import ./nixpkgs/javalsp { inherit cfg pkgs; });
+      azsh-install = pkgs.writeScriptBin "azsh-install" ''
+        ${pkgs.nix}/bin/nix-channel --update
+        ${pkgs.nix}/bin/nix-env -u
+        ${pkgs.nix}/bin/nix-env -i azsh -f ${cfg.url}
+      '';
+      palette = pkgs.writeScriptBin "palette" ''
+        #!/usr/bin/env zsh
+        for bold in 0 1; do
+          for col in {0..7}; do
+            echo -en "\e[$bold;3''${col}m $(printf '%X' $((col+bold*8))) "
+          done; echo
+        done; echo
+        for col in 2 6 4 5 1 3 0 7; do
+          echo -en "\e[0;3''${col}m \e[1;3''${col}m "
+        done; echo
+        for col in 2 6 4 5 1 3 0 7; do
+          echo -en "\e[0;3''${col}m$(printf '%X' $col) \e[1;3''${col}m$(printf '%X' $((col+8))) "
+        done; echo
+      '';
+      git-all = pkgs.writeScriptBin "git-all" ''
+        echo
+        for repo in $(find -L . -maxdepth 7 -iname '.git' -type d -printf '%P\0' 2>/dev/null | xargs -0 dirname | sort); do
+          echo -e "\e[38;5;${cfg.theme.executable}m \e[38;5;${cfg.theme.path}m$repo \e[0m(\e[38;5;${cfg.theme.function}m$@\e[0m)"
+          pushd $repo >/dev/null
+          ${cfg.pkgs.mygit}/bin/git "$@"
+          popd >/dev/null
+          echo
+        done
+      '';
     };
   };
 in
@@ -86,36 +115,13 @@ pkgs.stdenv.mkDerivation {
     w3m
     xz
     zip
+    (cfg.pkgs.azsh-install)
+    (cfg.pkgs.git-all)
     (cfg.pkgs.mygit)
     (cfg.pkgs.mytmux)
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
-    (writeScriptBin "azsh-install"
-      "${nix}/bin/nix-env -i azsh -f ${cfg.url}")
-    (writeScriptBin "palette" ''
-      #!/usr/bin/env zsh
-      for bold in 0 1; do
-        for col in {0..7}; do
-          echo -en "\e[$bold;3''${col}m $(printf '%X' $((col+bold*8))) "
-        done; echo
-      done; echo
-      for col in 2 6 4 5 1 3 0 7; do
-        echo -en "\e[0;3''${col}m \e[1;3''${col}m "
-      done; echo
-      for col in 2 6 4 5 1 3 0 7; do
-        echo -en "\e[0;3''${col}m$(printf '%X' $col) \e[1;3''${col}m$(printf '%X' $((col+8))) "
-      done; echo
-    '')
-    (writeScriptBin "git-all" ''
-      echo
-      for repo in $(find -L . -maxdepth 7 -iname '.git' -type d -printf '%P\0' 2>/dev/null | xargs -0 dirname | sort); do
-        echo -e "\e[38;5;${cfg.theme.executable}m \e[38;5;${cfg.theme.path}m$repo \e[0m(\e[38;5;${cfg.theme.function}m$@\e[0m)"
-        pushd $repo >/dev/null
-        ${cfg.pkgs.mygit}/bin/git "$@"
-        popd >/dev/null
-        echo
-      done
-    '')
+    (cfg.pkgs.palette)
   ];
   # entry point tmux session
   shellHook = ''
