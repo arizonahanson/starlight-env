@@ -119,6 +119,7 @@ pkgs.stdenv.mkDerivation {
   installPhase = ''
     makeWrapper "${cfg.pkgs.mytmux}/bin/tmux" "$out/bin/mytmux" --add-flags "-2 new-session -A -s mytmux"
     makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/dde" --add-flags "$src"
+    makeWrapper "${pkgs.nix}/bin/nix-env" "$out/bin/dde-install" --add-flags "-i starlight-env -f ${cfg.url}"
   '';
   shellHook = ''
     exec mytmux
