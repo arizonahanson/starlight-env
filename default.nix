@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ config ? {}, pkgs ? import <nixpkgs> { } }:
 let
   cfg = {
     url = "https://github.com/arizonahanson/starlight-env/archive/main.tar.gz";
