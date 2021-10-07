@@ -78,6 +78,13 @@ in
 pkgs.stdenv.mkDerivation {
   name = "azsh";
   src = ./.;
+  dontMakeSourcesWritable = 1;
+  dontPatch = true;
+  dontConfigure = true;
+  dontBuild = true;
+  dontStrip = true;
+  dontPatchELF = true;
+  dontPruneLibtoolFiles = true;
   # environment variables
   EDITOR = "${cfg.pkgs.myvim}/bin/vim";
   FZF_TMUX = "1";
