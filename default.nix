@@ -43,6 +43,7 @@ let
       myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
       myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
       javalsp = (import ./nixpkgs/javalsp { inherit cfg pkgs; });
+      silq = (import ./nixpkgs/silq { inherit cfg pkgs; });
       azsh-from = pkgs.writeScriptBin "azsh-from" ''
         ${pkgs.nix}/bin/nix-channel --update
         ${pkgs.nix}/bin/nix-env -u
@@ -129,6 +130,7 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
     (cfg.pkgs.palette)
+    (cfg.pkgs.silq)
     (writeScriptBin "azsh-install" "${cfg.pkgs.azsh-from}/bin/azsh-from $src")
   ];
   # entry point tmux session
