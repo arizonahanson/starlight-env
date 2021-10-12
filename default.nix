@@ -130,9 +130,8 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
     (cfg.pkgs.palette)
-    (cfg.pkgs.silq)
     (writeScriptBin "azsh-install" "${cfg.pkgs.azsh-from}/bin/azsh-from $src")
-  ];
+  ] ++ pkgs.lib.optional (!pkgs.stdenv.isDarwin) cfg.pkgs.silq;
   # entry point tmux session
   shellHook = ''
     exec "${cfg.pkgs.mytmux}/bin/tmux" -2 new-session -A -s mytmux
