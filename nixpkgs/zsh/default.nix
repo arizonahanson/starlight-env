@@ -1058,6 +1058,7 @@ pkgs.stdenv.mkDerivation {
     alias ggs="git all status -sb"
     alias ggx="git all clean -fxd"
     alias gx="git clean -fxd"
+    alias stripansi="sed -i 's/\x1b\[[0-9;]*m//g'"
     EOF
 
     cat > $out/.zlogin <<EOF
