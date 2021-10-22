@@ -332,6 +332,15 @@ in
               sha256 = "0q2nqmxc8rm4sg6v37isyj7zdlxh4qv1n80gm44v9b9yyws6bnr1";
             };
           };
+          vim-openscad = pkgs.vimUtils.buildVimPlugin {
+            name = "vim-openscad";
+            src = pkgs.fetchFromGitHub {
+              owner = "sirtaj";
+              repo = "vim-openscad";
+              rev = "81db508b1888fdbea994d43ccef1acd86c8af3f7";
+              sha256 = "1wcdfayjpb9h0lzwdi5nda4c0ch263fdr0379l9k1gf47bgq9cx2";
+            };
+          };
         in
         with pkgs.vimPlugins; [
           vim-sensible
@@ -344,6 +353,7 @@ in
           vim-fugitive
           vim-gitgutter
           vim-gutentags
+          (vim-openscad)
           ale
         ];
     };
