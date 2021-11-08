@@ -46,6 +46,7 @@ let
       silq = (import ./nixpkgs/silq { inherit cfg pkgs; });
       azsh-from = pkgs.writeScriptBin "azsh-from" ''
         ${pkgs.nix}/bin/nix-channel --update
+        ${pkgs.nix}/bin/nix-env -u nix
         ${pkgs.nix}/bin/nix-env -u
         ${pkgs.nix}/bin/nix-env -i azsh -f "$1"
       '';
