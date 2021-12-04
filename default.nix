@@ -7,7 +7,7 @@ let
       fg-alt = "7";
       bg = "0";
       bg-alt = "8";
-      accent = "3";
+      accent = "12";
       substitution = "7";
       path = "4";
       match = "9";
