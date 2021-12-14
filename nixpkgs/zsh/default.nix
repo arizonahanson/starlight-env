@@ -870,7 +870,7 @@ let
           fi
         fi
         unset git_root
-        PROMPT="%(?.${toFG cfg.theme.fg-alt}.${toFG cfg.theme.error})%m$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
+        PROMPT="%(?.${toFG cfg.theme.fg-alt}.${toFG cfg.theme.error})%h$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
         PS2="%{$reset_color%}${toFG cfg.theme.warning}%_$ZSH_THEME_GIT_PROMPT_PROMPT2%{$reset_color%} "
         RPROMPT="$STATUS$WORKDIR$ZSH_THEME_GIT_PROMPT_SUFFIX"
       }
