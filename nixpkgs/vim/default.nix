@@ -24,7 +24,7 @@ in
         let g:ale_completion_delay=1000
         let g:ale_cache_executable_check_failures=1
         let g:ale_close_preview_on_insert=1
-        let g:ale_fixers={ 'go': ['gofmt'], 'nix': ['nixpkgs-fmt'], 'java': ['uncrustify'], 'javascript': ['eslint'], 'typescript': ['eslint'] }
+        let g:ale_fixers={ 'nix': ['nixpkgs-fmt'], 'java': ['uncrustify'], 'javascript': ['eslint'], 'typescript': ['eslint'] }
         let g:ale_fix_on_save=1
         let g:ale_hover_to_preview=1
         let g:ale_lint_delay=2000
@@ -41,6 +41,9 @@ in
         let g:gitgutter_sign_modified_removed=' '
         let g:gitgutter_sign_removed=' '
         let g:gitgutter_sign_removed_first_line=' '
+        let g:go_auto_type_info=1
+        let g:go_doc_popup_window=1
+        let g:go_fmt_autosave=1
         let g:go_highlight_structs=1
         let g:go_highlight_methods=1
         let g:go_highlight_functions=1
@@ -356,6 +359,7 @@ in
           vim-cool
           vim-polyglot
           vim-nix
+          vim-go
           julia-vim
           editorconfig-vim
           (vim-auto-origami)
