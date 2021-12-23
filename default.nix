@@ -110,6 +110,7 @@ pkgs.stdenv.mkDerivation {
     gnupg
     gnused
     gnutar
+    go
     less
     makeWrapper
     man-db
