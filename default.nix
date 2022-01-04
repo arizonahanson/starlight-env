@@ -44,10 +44,13 @@ let
       myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
       javalsp = (import ./nixpkgs/javalsp { inherit cfg pkgs; });
       silq = (import ./nixpkgs/silq { inherit cfg pkgs; });
+      azsh-shell = pkgs.writeScriptBin "azsh-shell" ''
+        nix-shell $@
+      '';
       azsh-from = pkgs.writeScriptBin "azsh-from" ''
-        ${pkgs.nix}/bin/nix-channel --update
-        ${pkgs.nix}/bin/nix-env -u
-        ${pkgs.nix}/bin/nix-env -i azsh -f "$1"
+        nix-channel --update
+        nix-env -u
+        nix-env -i azsh -f "$1"
       '';
       palette = pkgs.writeScriptBin "palette" ''
         #!/usr/bin/env zsh
@@ -139,7 +142,7 @@ pkgs.stdenv.mkDerivation {
   '';
   # nix-shell wrapper "azsh"
   installPhase = ''
-    makeWrapper "${pkgs.nix}/bin/nix-shell" "$out/bin/azsh" --add-flags "$src"
+    makeWrapper "${cfg.pkgs.azsh-shell}/bin/azsh-shell" "$out/bin/azsh" --add-flags "$src"
     makeWrapper "${cfg.pkgs.azsh-from}/bin/azsh-from" "$out/bin/azsh-update" --add-flags "${cfg.url}"
   '';
 }
