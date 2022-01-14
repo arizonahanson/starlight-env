@@ -52,7 +52,7 @@ in
         let g:vimcache='/'.$TMP.'/.'.$USER.'/vim/'
         let g:gutentags_cache_dir=g:vimcache.'ctags//'
         let g:gutentags_exclude_filetypes=["gitcommit", "gitrebase", "markdown", "nix", ""]
-        let g:latex_to_unicode_file_types=["gitcommit", "gitrebase", "markdown", "julia", "nix", ""]
+        let g:latex_to_unicode_file_types=".*"
         let g:netrw_home=g:vimcache.'netrw'
       '' + pkgs.lib.optionalString ((pkgs.config.javaSupport or false) && pkgs.stdenv.isDarwin) ''
         let g:ale_java_javalsp_executable='${cfg.pkgs.javalsp}/bin/lang_server'
