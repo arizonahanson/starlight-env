@@ -104,6 +104,7 @@ pkgs.stdenv.mkDerivation {
   propagatedBuildInputs = with pkgs; [
     ag
     calc
+    (lowPrio toybox)
     coreutils
     ctags
     curl
