@@ -76,6 +76,9 @@ let
           echo
         done
       '';
+      vim-agl = pkgs.writeScriptBin "vim-agl" ''
+        ${cfg.pkgs.myvim}/bin/vim -p $(ag -l "$@")
+      '';
     };
   };
 in
@@ -134,6 +137,7 @@ pkgs.stdenv.mkDerivation {
     (cfg.pkgs.myvim)
     (cfg.pkgs.myzsh)
     (cfg.pkgs.palette)
+    (cfg.pkgs.vim-agl)
     (writeScriptBin "azsh-install" "${cfg.pkgs.azsh-from}/bin/azsh-from $src")
   ] ++ pkgs.lib.optional (!pkgs.stdenv.isDarwin) cfg.pkgs.silq;
   # entry point tmux session
