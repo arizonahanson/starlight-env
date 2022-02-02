@@ -938,7 +938,7 @@ pkgs.stdenv.mkDerivation {
     ZLE_RPROMPT_INDENT=0
     plugins=(git colored-man-pages git-prompt)
     eval \$(${pkgs.coreutils}/bin/dircolors -b ${dircolors}/etc/dircolors)
-    fpath=("$HOME/.local/share/zsh/site-functions" ${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
+    fpath=("\$HOME/.local/share/zsh/site-functions" ${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
     export PATH="\$PATH:\$HOME/go/bin"
     # fzf with tmux
     source ${pkgs.fzf}/share/fzf/key-bindings.zsh
