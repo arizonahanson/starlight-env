@@ -124,7 +124,6 @@ pkgs.stdenv.mkDerivation {
     nox
     shellcheck
     tree
-    units
     unixtools.whereis
     unzip
     w3m
