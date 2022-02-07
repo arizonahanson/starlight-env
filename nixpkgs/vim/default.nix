@@ -82,6 +82,7 @@ in
         set cursorline
         autocmd FileType gitcommit setlocal spell spelllang=en_us
         autocmd FileType markdown setlocal spell spelllang=en_us
+        autocmd BufRead,BufNewFile *.peg set ft=pigeon
         highlight Normal ctermbg=NONE ctermfg=${cfg.theme.fg} ctermul=NONE cterm=NONE
         highlight Noise ctermbg=NONE ctermfg=${cfg.theme.fg-alt} cterm=NONE
         highlight Identifier ctermbg=NONE ctermfg=${cfg.theme.substitution} cterm=NONE
@@ -335,6 +336,15 @@ in
               sha256 = "0q2nqmxc8rm4sg6v37isyj7zdlxh4qv1n80gm44v9b9yyws6bnr1";
             };
           };
+          vim-pigeon = pkgs.vimUtils.buildVimPlugin {
+            name = "vim-pigeon";
+            src = pkgs.fetchFromGitHub {
+              owner = "jasontbradshaw";
+              repo = "pigeon.vim";
+              rev = "master";
+              sha256 = "079krbw1z4bjwa7qfz33fwjy5h0fry0i2a02wnvqkrqnxmzq5dxs";
+            };
+          };
           vim-openscad = pkgs.vimUtils.buildVimPlugin {
             name = "vim-openscad";
             src = pkgs.fetchFromGitHub {
@@ -358,6 +368,7 @@ in
           vim-sensible
           vim-cool
           vim-polyglot
+          (vim-pigeon)
           vim-nix
           vim-go
           julia-vim
