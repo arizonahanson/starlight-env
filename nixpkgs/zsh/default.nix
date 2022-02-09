@@ -929,9 +929,9 @@ pkgs.stdenv.mkDerivation {
     # Only execute this file once per interactive shell.
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
     __ZDOT_ZSHRC_SOURCED=1
-    HISTFILE="\$HOME/.zsh_history"
-    HISTSIZE=8192
-    SAVEHIST=8192
+    HISTFILE="\$HOME/.azsh_history"
+    HISTSIZE=9999
+    SAVEHIST=9999
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
     ZSH_THEME="starlight"
     ZSH_CUSTOM="${zshtheme}"
