@@ -931,10 +931,13 @@ pkgs.stdenv.mkDerivation {
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.azsh_history"
-    HIST_EXPIRE_DUPS_FIRST=1
-    HIST_IGNORE_DUPS=1
-    HISTSIZE=8192
-    SAVEHIST=4096
+    HISTSIZE=999
+    SAVEHIST=499
+    setopt INC_APPEND_HISTORY
+    setopt HIST_EXPIRE_DUPS_FIRST
+    setopt HIST_IGNORE_DUPS
+    setopt HIST_IGNORE_SPACE
+    setopt HIST_FIND_NO_DUPS
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
     ZSH_THEME="starlight"
     ZSH_CUSTOM="${zshtheme}"
