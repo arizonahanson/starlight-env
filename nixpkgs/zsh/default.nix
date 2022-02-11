@@ -930,21 +930,17 @@ pkgs.stdenv.mkDerivation {
     # Only execute this file once per interactive shell.
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
     __ZDOT_ZSHRC_SOURCED=1
-    HISTFILE="\$HOME/.azsh_history"
-    HISTSIZE=999
-    SAVEHIST=499
-    setopt INC_APPEND_HISTORY
-    setopt HIST_EXPIRE_DUPS_FIRST
-    setopt HIST_IGNORE_DUPS
-    setopt HIST_IGNORE_SPACE
-    setopt HIST_FIND_NO_DUPS
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
     ZSH_THEME="starlight"
     ZSH_CUSTOM="${zshtheme}"
-    ZLE_RPROMPT_INDENT=0
     plugins=(git colored-man-pages git-prompt)
-    eval \$(${pkgs.coreutils}/bin/dircolors -b ${dircolors}/etc/dircolors)
     fpath=("\$HOME/.local/share/zsh/site-functions" ${pkgs.zsh-completions}/share/zsh/site-functions ${pkgs.nix-zsh-completions}/share/zsh/site-functions \$fpath)
+    source \$ZSH/oh-my-zsh.sh
+    if test -r "\$HOME/.zshrc"; then
+      source "\$HOME/.zshrc"
+    fi
+    ZLE_RPROMPT_INDENT=0
+    eval \$(${pkgs.coreutils}/bin/dircolors -b ${dircolors}/etc/dircolors)
     export PATH="\$PATH:\$HOME/go/bin"
     # fzf with tmux
     source ${pkgs.fzf}/share/fzf/key-bindings.zsh
@@ -987,10 +983,14 @@ pkgs.stdenv.mkDerivation {
     setopt correct
     # turn off completion beeps
     unsetopt LIST_BEEP
-    if test -r "\$HOME/.zshrc"; then
-      source "\$HOME/.zshrc"
-    fi
-    source \$ZSH/oh-my-zsh.sh
+    HISTFILE="\$HOME/.azsh_history"
+    HISTSIZE=999
+    SAVEHIST=499
+    setopt INC_APPEND_HISTORY
+    setopt HIST_EXPIRE_DUPS_FIRST
+    setopt HIST_IGNORE_DUPS
+    setopt HIST_IGNORE_SPACE
+    setopt HIST_FIND_NO_DUPS
     # vi-like editing
     bindkey -v
     # backspace
