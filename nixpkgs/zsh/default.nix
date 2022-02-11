@@ -932,8 +932,9 @@ pkgs.stdenv.mkDerivation {
     __ZDOT_ZSHRC_SOURCED=1
     HISTFILE="\$HOME/.azsh_history"
     HIST_EXPIRE_DUPS_FIRST=1
-    HISTSIZE=9999
-    SAVEHIST=8999
+    HIST_IGNORE_DUPS=1
+    HISTSIZE=8192
+    SAVEHIST=4096
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
     ZSH_THEME="starlight"
     ZSH_CUSTOM="${zshtheme}"
