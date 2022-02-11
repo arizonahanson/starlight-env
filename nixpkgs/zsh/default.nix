@@ -930,6 +930,7 @@ pkgs.stdenv.mkDerivation {
     # Only execute this file once per interactive shell.
     if [ -n "\$__ZDOT_ZSHRC_SOURCED" ]; then return; fi
     __ZDOT_ZSHRC_SOURCED=1
+    # oh-my-zsh
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
     ZSH_THEME="starlight"
     ZSH_CUSTOM="${zshtheme}"
@@ -981,16 +982,18 @@ pkgs.stdenv.mkDerivation {
     alias help=run-help
     # spellcheck commands
     setopt correct
+    setopt DVORAK
     # turn off completion beeps
     unsetopt LIST_BEEP
+    # history
     HISTFILE="\$HOME/.azsh_history"
-    HISTSIZE=999
-    SAVEHIST=499
+    HISTSIZE=1999
+    SAVEHIST=999
     setopt INC_APPEND_HISTORY
     setopt HIST_EXPIRE_DUPS_FIRST
     setopt HIST_IGNORE_DUPS
     setopt HIST_IGNORE_SPACE
-    setopt HIST_FIND_NO_DUPS
+    setopt HIST_REDUCE_BLANKS
     # vi-like editing
     bindkey -v
     # backspace
