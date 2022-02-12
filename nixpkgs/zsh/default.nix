@@ -987,8 +987,8 @@ pkgs.stdenv.mkDerivation {
     unsetopt LIST_BEEP
     # history
     HISTFILE="\$HOME/.azsh_history"
-    HISTSIZE=1999
-    SAVEHIST=999
+    HISTSIZE=9999
+    SAVEHIST=8192
     setopt INC_APPEND_HISTORY
     setopt HIST_EXPIRE_DUPS_FIRST
     setopt HIST_IGNORE_DUPS
