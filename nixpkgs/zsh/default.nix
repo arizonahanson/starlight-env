@@ -974,7 +974,7 @@ pkgs.stdenv.mkDerivation {
     export ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=${cfg.theme.constant}'
     export ZSH_HIGHLIGHT_STYLES[assign]='fg=${cfg.theme.fg-alt}'
     export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${cfg.theme.bg-alt}"
-    export ZSH_AUTOSUGGEST_STRATEGY=("match_prev_cmd")
+    export ZSH_AUTOSUGGEST_STRATEGY=("match_prev_cmd" "history")
     ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=vi-forward-char
     autoload -Uz run-help
     unalias run-help
@@ -1045,10 +1045,6 @@ pkgs.stdenv.mkDerivation {
       if [ ! "\$TERM" = "linux" ]; then
         echo -ne "\\e[5 q"
       fi
-    }
-    zshaddhistory() {
-      emulate -L zsh
-      [[ \''${#1} -gt 3 ]]
     }
     # Load the aliases.
     . "\$ZDOTDIR/.zsh_aliases"
