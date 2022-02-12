@@ -873,7 +873,6 @@ let
         PROMPT="%(?.${toFG cfg.theme.fg-alt}.${toFG cfg.theme.error})%h$ZSH_THEME_GIT_PROMPT_PROMPT%{$reset_color%} "
         PS2="%{$reset_color%}${toFG cfg.theme.warning}%_$ZSH_THEME_GIT_PROMPT_PROMPT2%{$reset_color%} "
         RPROMPT="$STATUS$WORKDIR$ZSH_THEME_GIT_PROMPT_SUFFIX"
-        SPROMPT="${toFG cfg.theme.accent}zsh%{$reset_color%}: correct '${toFG cfg.theme.error}%R%{$reset_color%}' to '${toFG cfg.theme.executable}%r%{$reset_color%}' ${toFG cfg.theme.fg-alt}[nyae]%{$reset_color%}?"
       }
       autoload -U add-zsh-hook
       add-zsh-hook precmd git_prompt_status
