@@ -1046,6 +1046,10 @@ pkgs.stdenv.mkDerivation {
         echo -ne "\\e[5 q"
       fi
     }
+    zshaddhistory() {
+      emulate -L zsh
+      [[ \''${#1} -gt 3 ]]
+    }
     # Load the aliases.
     . "\$ZDOTDIR/.zsh_aliases"
     if [ -f ~/.zsh_aliases ]; then
