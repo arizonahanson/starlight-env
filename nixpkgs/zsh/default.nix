@@ -1069,6 +1069,7 @@ pkgs.stdenv.mkDerivation {
     alias ggs="git all status -sb"
     alias ggx="git all clean -fxd"
     alias gx="git clean -fxd"
+    alias gxb="git branch -vv | grep ': gone]'|  grep -v '*' | awk '{ print \\\$1; }' | xargs -r git branch -D"
     alias stripansi="sed -i 's/\x1b\[[0-9;]*m//g'"
     EOF
 
