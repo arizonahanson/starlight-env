@@ -987,7 +987,7 @@ pkgs.stdenv.mkDerivation {
     # history
     HISTFILE="\$HOME/.azsh_history"
     HISTSIZE=9999
-    SAVEHIST=8192
+    SAVEHIST=8999
     setopt INC_APPEND_HISTORY
     setopt HIST_EXPIRE_DUPS_FIRST
     setopt HIST_IGNORE_DUPS
