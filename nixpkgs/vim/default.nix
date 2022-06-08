@@ -15,7 +15,7 @@ in
 }).customize
 {
   name = "myvim";
-  vimExecutableName = "vim";
+  executableName = "vim";
   vimrcConfig =
     {
       beforePlugins = ''

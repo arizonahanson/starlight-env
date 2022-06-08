@@ -96,8 +96,8 @@ pkgs.stdenv.mkDerivation {
   EDITOR = "${cfg.pkgs.myvim}/bin/vim";
   FZF_TMUX = "1";
   FZF_ALT_C_COMMAND = "${pkgs.findutils}/bin/find -L . -maxdepth 16 -type d 2>/dev/null";
-  FZF_CTRL_T_COMMAND = "${pkgs.ag}/bin/ag -f -g '' --hidden --depth 16 --ignore dosdevices";
-  FZF_DEFAULT_COMMAND = "${pkgs.ag}/bin/ag -f -g '' --hidden --depth 16 --ignore dosdevices";
+  FZF_CTRL_T_COMMAND = "${pkgs.silver-searcher}/bin/ag -f -g '' --hidden --depth 16 --ignore dosdevices";
+  FZF_DEFAULT_COMMAND = "${pkgs.silver-searcher}/bin/ag -f -g '' --hidden --depth 16 --ignore dosdevices";
   FZF_DEFAULT_OPTS = "-m --ansi --no-bold --color=dark,fg:${cfg.theme.fg},bg:${cfg.theme.bg},hl:${cfg.theme.match},fg+:${cfg.theme.select},bg+:${cfg.theme.bg},hl+:${cfg.theme.match},info:${cfg.theme.bg-alt},border:${cfg.theme.fg-alt},prompt:${cfg.theme.fg-alt},pointer:${cfg.theme.select},marker:${cfg.theme.select},spinner:${cfg.theme.info},header:${cfg.theme.fg-alt} --tac";
   GREP_COLORS = "mt=38;5;${cfg.theme.match}:sl=:cx=:fn=38;5;${cfg.theme.path}:ln=38;5;${cfg.theme.bg-alt}:bn=38;5;${cfg.theme.number}:se=38;5;${cfg.theme.fg-alt}";
   KEYTIMEOUT = "1"; # shorter zsh cmd-mode delay
@@ -105,7 +105,7 @@ pkgs.stdenv.mkDerivation {
   TIGRC_USER = "${cfg.pkgs.mygit}/etc/tigrc";
   # packages
   propagatedBuildInputs = with pkgs; [
-    ag
+    silver-searcher
     calc
     coreutils
     ctags

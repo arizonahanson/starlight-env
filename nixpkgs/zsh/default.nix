@@ -1061,7 +1061,7 @@ pkgs.stdenv.mkDerivation {
     alias lt="${pkgs.tree}/bin/tree -aFC -I .git -L 2"
     alias cp="${pkgs.coreutils}/bin/cp --reflink=auto"
     alias xz="${pkgs.xz}/bin/xz --threads=0"
-    alias ag="${pkgs.ag}/bin/ag --color-line-number '38;5;${cfg.theme.bg-alt}' --color-path '38;5;${cfg.theme.path}' --color-match '38;5;${cfg.theme.match}'"
+    alias ag="${pkgs.silver-searcher}/bin/ag --color-line-number '38;5;${cfg.theme.bg-alt}' --color-path '38;5;${cfg.theme.path}' --color-match '38;5;${cfg.theme.match}'"
     alias gdt="git difftool"
     alias gg="git all"
     alias ggc="git all gc"
