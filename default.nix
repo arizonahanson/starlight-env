@@ -42,7 +42,6 @@ let
       mytmux = (import ./nixpkgs/tmux { inherit cfg pkgs; });
       myvim = (import ./nixpkgs/vim { inherit cfg pkgs; });
       myzsh = (import ./nixpkgs/zsh { inherit cfg pkgs; });
-      javalsp = (import ./nixpkgs/javalsp { inherit cfg pkgs; });
       silq = (import ./nixpkgs/silq { inherit cfg pkgs; });
       azsh-shell = pkgs.writeScriptBin "azsh-shell" ''
         nix-shell $@

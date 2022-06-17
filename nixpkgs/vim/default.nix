@@ -24,7 +24,7 @@ in
         let g:ale_completion_delay=1000
         let g:ale_cache_executable_check_failures=1
         let g:ale_close_preview_on_insert=1
-        let g:ale_fixers={ 'nix': ['nixpkgs-fmt'], 'java': ['uncrustify'], 'javascript': ['eslint'], 'typescript': ['eslint'], 'typescriptreact': ['eslint'] }
+        let g:ale_fixers={ 'nix': ['nixpkgs-fmt'], 'javascript': ['eslint'], 'typescript': ['eslint'], 'typescriptreact': ['eslint'] }
         let g:ale_fix_on_save=1
         let g:ale_hover_to_preview=1
         let g:ale_lint_delay=2000
@@ -54,8 +54,6 @@ in
         let g:gutentags_exclude_filetypes=["gitcommit", "gitrebase", "markdown", "nix", ""]
         let g:latex_to_unicode_file_types=".*"
         let g:netrw_home=g:vimcache.'netrw'
-      '' + pkgs.lib.optionalString ((pkgs.config.javaSupport or false) && pkgs.stdenv.isDarwin) ''
-        let g:ale_java_javalsp_executable='${cfg.pkgs.javalsp}/bin/lang_server'
       '';
       customRC = ''
         "--- important
