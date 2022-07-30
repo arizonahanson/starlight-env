@@ -1054,6 +1054,7 @@ pkgs.stdenv.mkDerivation {
     EOF
     cat > $out/.zsh_aliases <<EOF
     unalias ls
+    unalias gsi #gambit interpreter
     alias ls="${pkgs.coreutils}/bin/ls --color=auto"
     alias l="ls -Fh"
     alias la="l -A"
