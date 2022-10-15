@@ -120,7 +120,6 @@ pkgs.stdenv.mkDerivation {
     makeWrapper
     man-db
     nixpkgs-fmt
-    nox
     shellcheck
     tree
     unixtools.whereis
