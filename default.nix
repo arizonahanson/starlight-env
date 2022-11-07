@@ -3,12 +3,12 @@ let
   cfg = {
     url = "https://github.com/arizonahanson/starlight-env/archive/main.tar.gz";
     theme = {
-      fg = "15";
-      fg-alt = "7";
-      bg = "0";
-      bg-alt = "8";
+      fg = "0";
+      fg-alt = "8";
+      bg = "15";
+      bg-alt = "7";
       accent = "12";
-      substitution = "7";
+      substitution = "8";
       path = "4";
       match = "9";
       string = "3";

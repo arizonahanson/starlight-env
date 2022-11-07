@@ -338,16 +338,11 @@ let
       .vbs                  38;5;81
       # 2}}}
       # Build stuff {{{2
-      *Dockerfile           38;5;155
       .dockerignore         38;5;240
-      *Makefile             38;5;155
       *MANIFEST             38;5;243
       *pm_to_blib           38;5;240
       # Functional Configuration
-      .nix                  38;5;155
       .dhall                38;5;178
-      # ruby rake
-      .rake                 38;5;155
       # automake
       .am                   38;5;242
       .in                   38;5;242
